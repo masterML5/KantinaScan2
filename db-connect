@@ -1,0 +1,18 @@
+
+<?php
+
+//$connect = odbc_connect('testporta', '', '');
+
+
+//parametri odbc konekcije
+$server='10.11.124.13';
+$database='Att2012';
+$user='porta';
+$password='porta1';
+
+$dbo = odbc_connect("Driver={SQL Server Native Client 11.0};Server=$server;Database=$database;", $user, $password); //konekcija ka odbc
+
+
+
+
+?>

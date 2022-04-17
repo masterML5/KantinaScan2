@@ -1,0 +1,24 @@
+{
+  "name": "package",
+  "version": "1.0.0",
+  "description": "",
+  "main": "non-empty.js",
+  "dependencies": {
+    "bootstrap-select": "^1.13.18",
+    "sweetalert": "^2.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/masterML5/KantinaScan2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/masterML5/KantinaScan2/issues"
+  },
+  "homepage": "https://github.com/masterML5/KantinaScan2#readme"
+}

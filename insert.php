@@ -8,6 +8,7 @@
         $ime_prezime= $_POST['ime_prezime'];
 		$datum = $_POST['datum'];
         $vrsta_obroka = $_POST['vrsta_obroka']; 
+		$ime_jela = $_POST['ime_jela'];
 		
         
 		// insert data
@@ -16,12 +17,19 @@
    		{  
       		$chk .= $chk1;  
   		 }  
-		
+		$ime_jela2="";  
+		   foreach($ime_jela as $chk5)  
+			  {  
+				 $ime_jela2 .= $chk5;  
+			  }  
+		   
+
+
         $pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		$sql = "INSERT INTO kantina_statistika (broj_kartice,ime_prezime,datum,vrsta_obroka) values (?, ?, ?, ?)";
+		$sql = "INSERT INTO kantina_statistika (broj_kartice,ime_prezime,datum,vrsta_obroka,ime_jela) values (?, ?, ?, ?, ?)";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($broj_kartice,$ime_prezime,$datum,$chk));
+		$q->execute(array($broj_kartice,$ime_prezime,$datum,$chk,$ime_jela2));
 		Database::disconnect();
 		header("Location: index.php");
     }
