@@ -78,7 +78,7 @@
           ?>
           <article class="labelcaption">
           <label class="naslov" for="<?= $vrstajelahladan['id_vrsta_jela'];?>">
-          <input id="<?= $vrstajelahladan['id_vrsta_jela'];?>" class="hladnajela2" type="checkbox"  name="ime_jela[]" value="<?= $vrstajelahladan['ime_jela'];?>"/><?= $vrstajelahladan['ime_jela'];?>
+          <input id="<?= $vrstajelahladan['id_vrsta_jela'];?>" type="checkbox"  name="ime_jela[]" value="<?= $vrstajelahladan['ime_jela'];?>"/><span><?= $vrstajelahladan['ime_jela'];?><span>
           </label>
           <label class="labelcheckbox labeljela" for="<?= $vrstajelahladan['id_vrsta_jela'];?>"><img src="<?= $vrstajelahladan['slika'];?>" width="150" height="150">
           </label>
@@ -98,17 +98,24 @@
 
        
         //dnevni obrok iz baze kao checkbox
-        $sql = "SELECT ime_jela FROM vrsta_jela WHERE tip_jela = 'topli' AND datum = CURDATE()";
+        $sql = "SELECT * FROM vrsta_jela WHERE tip_jela = 'topli' AND datum = CURDATE()";
         $result2 = mysqli_query($con,$sql);
     
  
  
         if(mysqli_num_rows($result2) > 0){
-
+          ?>
+        <div class="toplajela" style="display:none;">
+        <?php
         foreach($result2 as $vrstajelatopli){
           ?>
-         <p class="toplajela" style="display:none;">
-         <input id="toplajela2" type="checkbox" name="ime_jela[]" value="<?= $vrstajelatopli['ime_jela'];?>"/> <?= $vrstajelatopli['ime_jela'];?>
+          <article class="labelcaption">
+          <label class="naslov" for="<?= $vrstajelatopli['id_vrsta_jela'];?>">
+          <input id="<?= $vrstajelatopli['id_vrsta_jela'];?>" type="checkbox"  name="ime_jela[]" value="<?= $vrstajelatopli['ime_jela'];?>"/><span><?= $vrstajelatopli['ime_jela'];?><span>
+          </label>
+          <label class="labelcheckbox labeljela" for="<?= $vrstajelatopli['id_vrsta_jela'];?>"><img src="<?= $vrstajelatopli['slika'];?>" width="150" height="150">
+          </label>
+          </article>
           <?php
         }
           ?>
@@ -118,7 +125,7 @@
           echo "Niste izabrali obroke za danas";
         }
           ?>
-       </p>
+       </div>
 
       
         

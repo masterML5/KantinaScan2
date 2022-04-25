@@ -129,3 +129,7 @@ ul {
 .naslov input {
   margin: 0 1rem;
 }
+.naslov span{
+  text-transform: uppercase;
+  font-weight: bold;
+}
