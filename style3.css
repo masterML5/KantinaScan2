@@ -10,7 +10,7 @@ body {
         padding: 10px;
         border: 2px solid silver;
         border-radius: 15px 50px;
-        margin-top: 75px;
+        margin-top: 20px;
       
 }
 #topliobrok , #hladanobrok {
@@ -132,4 +132,9 @@ ul {
 .naslov span{
   text-transform: uppercase;
   font-weight: bold;
+}
+.toplajela{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
 }

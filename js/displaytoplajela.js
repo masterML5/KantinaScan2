@@ -4,7 +4,7 @@ function displayToplaJela() {
   var checkBoxToplaJela = document.getElementsByClassName("toplajela");
   for (var i=0; i<checkBoxToplaJela.length; i++) {
   if (checkBox2.checked == true){
-    checkBoxToplaJela[i].style.display = "block";
+    checkBoxToplaJela[i].style.display = "grid";
   } else {
     checkBoxToplaJela[i].style.display = "none";
   }
