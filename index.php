@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,16 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kantina</title>
+    <script src="index.js"></script>
+    <script src="dist/kioskboard-aio-2.2.0.min.js"></script>
     <link href="style3.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" integrity="sha512-yVvxUQV0QESBt1SyZbNJMAwyKvFTLMyXSyBHDO4BG5t7k/Lw34tyqlSDlKIrIENIzCl+RVUNjmCPG+V/GMesRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
-
+    
   </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> 
 <script language="JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <div class="card"  style="width: 25rem;">
+    <div class="card">
 
         <img src="images/profile.png" class="card-img-top" id="image"  name="image" alt="slika-profilna">
         <div class="card-body">
@@ -37,10 +40,14 @@
                
                 </script>
           </div>
-
-        </div>
-      <div>
-      <li>
+          <div class="tooltip">
+           
+          <input class="js-virtual-keyboard" data-kioskboard-type="keyboard" data-kioskboard-placement="bottom" data-kioskboard-specialcharacters="false" placeholder="Your Name" />
+          </div>
+          
+</div>
+ <div>
+  <li>
     <input type="checkbox" id="myCheckbox1"  class="vrsta_obroka" name="vrsta_obroka[]" onclick="displayHladnaJela()" value="hladni obrok"/>
     <label class="labelcheckbox"  for="myCheckbox1"><img src="images/hladan.png" width="150" height="150" /></label>
   </li>
@@ -48,6 +55,7 @@
     <input type="checkbox" id="myCheckbox2"   class="vrsta_obroka" name="vrsta_obroka[]" onclick="displayToplaJela()" value="topli obrok"/>
     <label class="labelcheckbox" for="myCheckbox2"><img src="images/topli.png" width="150" height="150" /></label>
   </li>
+</div>
   <script src="js/displayhladnajela.js"></script>
   <script src="js/displaytoplajela.js"></script>
   
@@ -55,29 +63,37 @@
         require ('connection.php');
         
         //dnevni obrok iz baze kao checkbox
-        $sql = "SELECT ime_jela FROM vrsta_jela WHERE tip_jela = 'hladan' AND datum = CURDATE()";
+        $sql = "SELECT * FROM vrsta_jela WHERE tip_jela = 'hladan' AND datum = CURDATE()";
         $result = mysqli_query($con,$sql);
      
        
       
        if(mysqli_num_rows($result) > 0){
-          
-        
+          ?>
+        <div class="hladnajela" style="display:none;">
+        <?php
         foreach($result as $vrstajelahladan){
           
-            ?>
-          <p class="hladnajela" style="display:none;">
-           <input  id="hladnajela2" type="checkbox" name="ime_jela[]" value="<?= $vrstajelahladan['ime_jela'];?>"/> <?= $vrstajelahladan['ime_jela'];?><br>
+            
+          ?>
+          <article class="labelcaption">
+          <label class="naslov" for="<?= $vrstajelahladan['id_vrsta_jela'];?>">
+          <input id="<?= $vrstajelahladan['id_vrsta_jela'];?>" class="hladnajela2" type="checkbox"  name="ime_jela[]" value="<?= $vrstajelahladan['ime_jela'];?>"/><?= $vrstajelahladan['ime_jela'];?>
+          </label>
+          <label class="labelcheckbox labeljela" for="<?= $vrstajelahladan['id_vrsta_jela'];?>"><img src="<?= $vrstajelahladan['slika'];?>" width="150" height="150">
+          </label>
+          </article>
             <?php
           }
             ?>
                 <?php
-          }
+          } 
           else{
             echo "Niste izabrali obroke za danas";
           }
             ?>
-           </p>
+           </div>
+         
           <?php
 
        
@@ -104,15 +120,17 @@
           ?>
        </p>
 
-
+      
         
 
  
+        <div class="actionButtons">
+        <button type="submit"  id="checkBtn" formaction="insert.php" class="btn btn-primary aBtn" >Dodaj</button>
+        <button type="reset" class="btn btn-danger aBtn" onClick="window.location.reload();">Poništi</button>
+        <a class="btn btn-primary aBtn" href="data/datatables.php" target="_blank">Evidencija/izmena izdatih obroka</a> 
         </div>
-        <button type="submit"  id="checkBtn" formaction="insert.php" class="btn btn-primary" >Dodaj</button>
-        <button type="reset" class="btn btn-danger" onClick="window.location.reload();">Poništi</button>
-        <a class="btn btn-primary" href="data/datatables.php" target="_blank">Evidencija/izmena izdatih obroka</a> 
       </div>
+   
     </form>
 <script src="js/verification.js"></script>
 <script src="js/stopenter.js"></script>

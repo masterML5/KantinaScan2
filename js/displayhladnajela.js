@@ -6,7 +6,7 @@ function displayHladnaJela() {
    
 
   if (checkBox.checked == true){
-   checkBoxHladnaJela[i].style.display = "block";
+   checkBoxHladnaJela[i].style.display = "grid";
   
   } else {
     checkBoxHladnaJela[i].style.display = "none";

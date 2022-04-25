@@ -4,11 +4,11 @@ $("#checkBtn").click(function(){
 var card = $("#CardNumber").val();
 var name = $("Name").val();
 var returnvalue = jQuery("#myCheckbox1").prop("checked") || jQuery("#myCheckbox2").prop("checked");
-var returnvalueimejela = jQuery("#hladnajela2").prop("checked") || jQuery("#toplajela2").prop("checked");
+//var returnvalueimejela = jQuery(document.querySelectorAll('.hladnajela2')).prop("checked") || jQuery("#toplajela2").prop("checked");
 /* var returnvalue2 = jQuery("#myCheckbox2").prop("checked"); */
 /* var meal1 = $("myCheckbox1").val();
 var meal2 = $("myCheckbox2").val(); */
-
+var checkedNum = $('input[name="ime_jela[]"]:checked').length;
 
 
 if(name == '' || card == '') {
@@ -29,7 +29,7 @@ else if(returnvalue == '') {
   })
   return false;
 }
-else if(returnvalueimejela == ''){
+else if(checkedNum == ''){
   Swal.fire({
     icon: 'error',
     title: 'Greška',
