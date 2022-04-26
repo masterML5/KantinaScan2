@@ -8,7 +8,7 @@
     <title>Kantina</title>
     <script src="index.js"></script>
     <script src="dist/kioskboard-aio-2.2.0.min.js"></script>
-    <link href="style3.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.min.css" integrity="sha512-yVvxUQV0QESBt1SyZbNJMAwyKvFTLMyXSyBHDO4BG5t7k/Lw34tyqlSDlKIrIENIzCl+RVUNjmCPG+V/GMesRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
@@ -48,11 +48,11 @@
 </div>
  <div>
   <li>
-    <input type="checkbox" id="myCheckbox1"  class="vrsta_obroka" name="vrsta_obroka[]" onclick="displayHladnaJela()" value="hladni obrok"/>
+    <input type="checkbox" id="myCheckbox1"  name="vrsta_obroka[]" onclick="displayHladnaJela()" value="hladni obrok"/>
     <label class="labelcheckbox"  for="myCheckbox1"><img src="images/hladan.png" width="150" height="150" /></label>
   </li>
   <li>
-    <input type="checkbox" id="myCheckbox2"   class="vrsta_obroka" name="vrsta_obroka[]" onclick="displayToplaJela()" value="topli obrok"/>
+    <input type="checkbox" id="myCheckbox2"    name="vrsta_obroka[]" onclick="displayToplaJela()" value="topli obrok"/>
     <label class="labelcheckbox" for="myCheckbox2"><img src="images/topli.png" width="150" height="150" /></label>
   </li>
 </div>
@@ -76,13 +76,15 @@
           
             
           ?>
-          <article class="labelcaption">
+          
+          <article  class="labelcaption">
           <label class="naslov" for="<?= $vrstajelahladan['id_vrsta_jela'];?>">
-          <input id="<?= $vrstajelahladan['id_vrsta_jela'];?>" type="checkbox"  name="ime_jela[]" value="<?= $vrstajelahladan['ime_jela'];?>"/><span><?= $vrstajelahladan['ime_jela'];?><span>
+          <input id="<?= $vrstajelahladan['id_vrsta_jela'];?>" type="checkbox"  class="x" name="ime_jela[]" value="<?= $vrstajelahladan['ime_jela'];?>"/><span><?= $vrstajelahladan['ime_jela'];?><span>
           </label>
-          <label class="labelcheckbox labeljela" for="<?= $vrstajelahladan['id_vrsta_jela'];?>"><img src="<?= $vrstajelahladan['slika'];?>" width="150" height="150">
+          <label class="labelcheckbox y" for="<?= $vrstajelahladan['id_vrsta_jela'];?>"><img src="<?= $vrstajelahladan['slika'];?>" width="150" height="150">
           </label>
           </article>
+        
             <?php
           }
             ?>
@@ -113,7 +115,7 @@
           <label class="naslov" for="<?= $vrstajelatopli['id_vrsta_jela'];?>">
           <input id="<?= $vrstajelatopli['id_vrsta_jela'];?>" type="checkbox"  name="ime_jela[]" value="<?= $vrstajelatopli['ime_jela'];?>"/><span><?= $vrstajelatopli['ime_jela'];?><span>
           </label>
-          <label class="labelcheckbox labeljela" for="<?= $vrstajelatopli['id_vrsta_jela'];?>"><img src="<?= $vrstajelatopli['slika'];?>" width="150" height="150">
+          <label class="labelcheckbox" for="<?= $vrstajelatopli['id_vrsta_jela'];?>"><img src="<?= $vrstajelatopli['slika'];?>" width="150" height="150">
           </label>
           </article>
           <?php

@@ -10,7 +10,7 @@ body {
         padding: 10px;
         border: 2px solid silver;
         border-radius: 15px 50px;
-        margin-top: 20px;
+        margin-top: 40px;
       
 }
 #topliobrok , #hladanobrok {
@@ -25,8 +25,8 @@ body {
     margin-top: -15px;
 }
 #image{
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
 }
 .btn-primary{
     margin: 5px;
@@ -37,7 +37,7 @@ ul {
     list-style-type: none;
   }
   
-  li {
+li {
     display: inline-block;
   }
   
@@ -45,7 +45,7 @@ ul {
     display: none;
   } */
   
-  label {
+label {
     border: 1px solid #fff;
     padding: 10px;
     display: table-cell;
@@ -55,7 +55,7 @@ ul {
     text-align: center;
   }
   
-  label:before {
+label:before {
     background-color: white;
     color: white;
     content: " ";
@@ -73,16 +73,16 @@ ul {
     transform: scale(0);
   }
   
-  label img {
+label img {
     height: 120px;
     width: 120px;
     transition-duration: 0.2s;
     transform-origin: 50% 50%;
   }
-  .labelcheckbox{
+.labelcheckbox{
     border: 1px solid grey;
   }
-  .label2{
+.label2{
     display: table-cell;
   }
   :checked + label {
@@ -101,6 +101,22 @@ ul {
     z-index: -1;
   }
 
+
+  .hladnajela :checked  {
+    border-color: red;
+  }
+  
+  .hladnajela :checked ~ label:before {
+    content: "✓";
+    background-color: rgb(57, 226, 23);
+    transform: scale(1);
+  }
+  
+  .hladnajela  :checked  ~ label img  {
+    transform: scale(0.9);  
+    box-shadow: 0 0 5px #333;
+    z-index: -1;
+  }
 .actionButtons{
     display: flex;
     
@@ -118,10 +134,6 @@ ul {
     gap: 1.5rem;
 }
 
-.labeljela img{
-  width: 100px;
-  height: 100px;
-}
 .naslov{
   display: table-cell;
   padding: 0.5rem;
