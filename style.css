@@ -141,12 +141,14 @@ label img {
 }
 .vrsta_bonova{
   display: block;
+  text-align: center;
 }
 .vrsta_bonova input {
   margin: 0.5rem;
 }
 .vrsta_bonova span{
  vertical-align: middle;
+ 
 
 
 }
@@ -155,5 +157,10 @@ label img {
   text-align: center;
   margin: 0;
 }
-
-
+.test{
+  display: flex;
+  
+}
+.form-group{
+  padding: 0.7rem;
+}

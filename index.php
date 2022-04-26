@@ -21,8 +21,10 @@
 
         <img src="assets/images/profile.png" class="card-img-top" id="image"  name="image" alt="slika-profilna">
         <div class="card-body">
+        <div class="test">
         <div class="form-group">
         <form action="insert.php" autocomplete="off"  name="forma" method="POST">
+         
                 <label class="label2" for="Userinfo">Broj kartice</label>
                 <input type="text" autofocus="autofocus" onkeyup="GetDetail2(this.value); GetDetail4(this.value)" class="form-control" id="CardNumber" name="broj_kartice" placeholder="Broj kartice" onkeypress='return stopenter(event)'>
                 </div>
@@ -39,13 +41,14 @@
                 document.getElementById('datum').valueAsDate = new Date();               
                 </script>
           </div>
+</div>
               <div class="form-group">
               <label class="vrsta_bona">Vrsta Bona</label>
                 <div class="vrsta_bonova">
                 
                 <input type="radio" class="form-check-input" id="redovan" name="vrsta_bona" value="redovan" checked><span id="redovanSpan" for="redovan">Redovan</span>
                 <input type="radio" class="form-check-input" id="gosti" name="vrsta_bona" value="gosti" ><span  id="gostiSpan" for="gosti">Gosti</span>
-                <input type="radio" class="form-check-input" id="fakturise_se" name="vrsta_bona" value="fakturise_se" ><span  id="fakturiseSeSpan" for="fakturise_se">Fakturise se</span>
+                <input type="radio" class="form-check-input" id="fakturise_se" name="vrsta_bona" value="faktura" ><span  id="fakturiseSeSpan" for="fakturise_se">Fakturise se</span>
                 </div>
               </div>
           <div class="tooltip">

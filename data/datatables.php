@@ -37,6 +37,7 @@
             <th>Broj kartice</th>
             <th>Datum</th>
             <th>Vrsta obroka</th>
+            <th>Vrsta bona</th>
             <th>Options</th>
           </thead>
           <tbody>
@@ -107,12 +108,13 @@ load(); //if you don't want the click
       var ime_prezime= $('#addUserField').val();
       var datum= $('#addDateField').val();
       var broj_kartice= $('#addCardField').val();
-      if(vrsta_obroka != '' && ime_prezime != '' && datum != '' && broj_kartice != '' )
+      var vrsta_bona = $('#addTypeField').val();
+      if(vrsta_obroka != '' && vrsta_bona != '' && ime_prezime != '' && datum != '' && broj_kartice != '' )
       {
        $.ajax({
          url:"add_user.php",
          type:"post",
-         data:{vrsta_obroka:vrsta_obroka,ime_prezime:ime_prezime,datum:datum,broj_kartice:broj_kartice},
+         data:{vrsta_obroka:vrsta_obroka,ime_prezime:ime_prezime,datum:datum,broj_kartice:broj_kartice,vrsta_bona:vrsta_bona},
          success:function(data)
          {
            var json = JSON.parse(data);
@@ -142,13 +144,14 @@ load(); //if you don't want the click
        var datum= $('#dateField').val();
        var broj_kartice= $('#cardField').val();
        var trid= $('#trid').val();
+       var vrsta_bona = $('#typeField').val();
        var id= $('#id').val();
-       if(vrsta_obroka != '' && ime_prezime != '' && datum != '' && broj_kartice != '' )
+       if(vrsta_obroka != '' && vrsta_bona != '' && ime_prezime != '' && datum != '' && broj_kartice != '' )
        {
          $.ajax({
            url:"update_user.php",
            type:"post",
-           data:{vrsta_obroka:vrsta_obroka,ime_prezime:ime_prezime,datum:datum,broj_kartice:broj_kartice,id:id},
+           data:{vrsta_obroka:vrsta_obroka,ime_prezime:ime_prezime,datum:datum,broj_kartice:broj_kartice,id:id,vrsta_bona:vrsta_bona},
            success:function(data)
            {
              var json = JSON.parse(data);
@@ -164,7 +167,7 @@ load(); //if you don't want the click
               // table.cell(parseInt(trid) - 1,4).data(vrsta_obroka);
               var button =   '<td><a href="javascript:void();" data-id="' +id + '" class="btn btn-info btn-sm editbtn">Izmeni</a>  <a href="#!" data-bs-toggle="modal" data-id="' +id + '" data-bs-target="#exampleModal" class="btn btn-danger btn-sm">Izbriši</a></td>';
               var row = table.row("[id='"+trid+"']");
-              row.row("[id='" + trid + "']").data([id,ime_prezime,broj_kartice,datum,vrsta_obroka,button]);
+              row.row("[id='" + trid + "']").data([id,ime_prezime,broj_kartice,datum,vrsta_obroka,vrsta_bona,button]);
               $('#exampleModal').modal('hide');
             }
             else
@@ -196,6 +199,7 @@ load(); //if you don't want the click
        $('#cardField').val(json.broj_kartice);
        $('#dateField').val(json.datum);
        $('#mealField').val(json.vrsta_obroka);
+       $('#typeField').val(json.vrsta_bona);
        $('#id').val(id);
        $('#trid').val(trid);
      }
@@ -275,13 +279,23 @@ load(); //if you don't want the click
             <label for="mealField" class="col-md-3 form-label">Vrsta obroka</label>
             <div class="col-md-9">
             <select name="vrsta_obroka" id="mealField">
-              <option value="hladan obrok" name="hladan obrok">Hladan obrok</option>
+              <option value="hladni obrok" name="hladni obrok">Hladan obrok</option>
               <option value="topli obrok" name="topli obrok">Topli obrok</option>
-  </select>
+           </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="typeField" class="col-md-3 form-label">Vrsta bona</label>
+            <div class="col-md-9">
+            <select name="vrsta_obroka" id="typeField">
+              <option value="redovan" name="redovan">Redovan</option>
+              <option value="gosti" name="gosti">Gosti</option>
+              <option value="faktura" name="fakturise_se">Fakturise se</option>
+                </select>
             </div>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-primary">Dodaj</button>
+            <button type="submit" class="btn btn-primary">Izmeni</button>
           </div>
         </form> 
       </div>
@@ -325,6 +339,16 @@ load(); //if you don't want the click
             <select name="vrsta_obroka" id="addMealField">
               <option value="hladan obrok" name="hladan obrok">Hladan obrok</option>
               <option value="topli obrok" name="topli obrok">Topli obrok</option>
+                </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="addTypeField" class="col-md-3 form-label">Vrsta bona</label>
+            <div class="col-md-9">
+            <select name="vrsta_obroka" id="addTypeField">
+              <option value="redovan" name="redovan">Redovan</option>
+              <option value="gosti" name="gosti">Gosti</option>
+              <option value="faktura" name="fakturise_se">Fakturise se</option>
                 </select>
             </div>
           </div>
