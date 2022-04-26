@@ -82,7 +82,9 @@ label img {
 .labelcheckbox{
     border: 1px solid grey;
   }
-
+.label2{
+    display: table-cell;
+  }
   :checked + label {
     border-color: #ddd;
   }
