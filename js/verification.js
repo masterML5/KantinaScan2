@@ -11,6 +11,7 @@ var meal2 = $("myCheckbox2").val(); */
 var checkedNum = $('input[name="ime_jela[]"]:checked').length;
 
 
+
 if(name == '' || card == '') {
     Swal.fire({
       icon: 'error',
@@ -34,6 +35,15 @@ else if(checkedNum == ''){
     icon: 'error',
     title: 'Greška',
     text: 'Izaberite jelo',
+   
+  })
+  return false;
+}
+else if(checkedNum > 1){
+  Swal.fire({
+    icon: 'error',
+    title: 'Greška',
+    text: 'Mozete samo jedno jelo da izaberete!',
    
   })
   return false;
