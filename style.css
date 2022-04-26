@@ -1,5 +1,5 @@
 body {
-    background-image: url("images/pozadina.jpg");
+    background-image: url("assets/images/pozadina.jpg");
 }
 .card {
     align-items: center;
@@ -89,7 +89,7 @@ label img {
     border-color: #ddd;
   }
   
-  :checked + label:before {
+:checked + label:before {
     content: "✓";
     background-color: rgb(57, 226, 23);
     transform: scale(1);
@@ -102,21 +102,6 @@ label img {
   }
 
 
-  .hladnajela :checked  {
-    border-color: red;
-  }
-  
-  .hladnajela :checked ~ label:before {
-    content: "✓";
-    background-color: rgb(57, 226, 23);
-    transform: scale(1);
-  }
-  
-  .hladnajela  :checked  ~ label img  {
-    transform: scale(0.9);  
-    box-shadow: 0 0 5px #333;
-    z-index: -1;
-  }
 .actionButtons{
     display: flex;
     
@@ -150,3 +135,25 @@ label img {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
 }
+#datum{
+  text-align: center;
+
+}
+.vrsta_bonova{
+  display: block;
+}
+.vrsta_bonova input {
+  margin: 0.5rem;
+}
+.vrsta_bonova span{
+ vertical-align: middle;
+
+
+}
+.vrsta_bona{
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
+
+

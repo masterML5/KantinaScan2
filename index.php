@@ -19,7 +19,7 @@
 <script language="JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.8.7/chosen.jquery.min.js" integrity="sha512-rMGGF4wg1R73ehtnxXBt5mbUfN9JUJwbk21KMlnLZDJh7BkPmeovBuddZCENJddHYYMkCh9hPFnPmS9sspki8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <div class="card">
 
-        <img src="images/profile.png" class="card-img-top" id="image"  name="image" alt="slika-profilna">
+        <img src="assets/images/profile.png" class="card-img-top" id="image"  name="image" alt="slika-profilna">
         <div class="card-body">
         <div class="form-group">
         <form action="insert.php" autocomplete="off"  name="forma" method="POST">
@@ -36,10 +36,18 @@
                 <label  class="label2" for="Userinfo">Datum</label>
                 <input type="date" readonly class="form-control-plaintext" id="datum" name="datum" value="datum">
                 <script>
-                document.getElementById('datum').valueAsDate = new Date();
-               
+                document.getElementById('datum').valueAsDate = new Date();               
                 </script>
           </div>
+              <div class="form-group">
+              <label class="vrsta_bona">Vrsta Bona</label>
+                <div class="vrsta_bonova">
+                
+                <input type="radio" class="form-check-input" id="redovan" name="vrsta_bona" value="redovan" checked><span id="redovanSpan" for="redovan">Redovan</span>
+                <input type="radio" class="form-check-input" id="gosti" name="vrsta_bona" value="gosti" ><span  id="gostiSpan" for="gosti">Gosti</span>
+                <input type="radio" class="form-check-input" id="fakturise_se" name="vrsta_bona" value="fakturise_se" ><span  id="fakturiseSeSpan" for="fakturise_se">Fakturise se</span>
+                </div>
+              </div>
           <div class="tooltip">
            
           <input class="js-virtual-keyboard" data-kioskboard-type="keyboard" data-kioskboard-placement="bottom" data-kioskboard-specialcharacters="false" placeholder="Your Name" />
@@ -49,11 +57,11 @@
  <div>
   <li>
     <input type="checkbox" id="myCheckbox1"  name="vrsta_obroka[]" onclick="displayHladnaJela()" value="hladni obrok"/>
-    <label class="labelcheckbox"  for="myCheckbox1"><img src="images/hladan.png" width="150" height="150" /></label>
+    <label class="labelcheckbox"  for="myCheckbox1"><img src="assets/images/hladan.png" width="150" height="150" /></label>
   </li>
   <li>
     <input type="checkbox" id="myCheckbox2"    name="vrsta_obroka[]" onclick="displayToplaJela()" value="topli obrok"/>
-    <label class="labelcheckbox" for="myCheckbox2"><img src="images/topli.png" width="150" height="150" /></label>
+    <label class="labelcheckbox" for="myCheckbox2"><img src="assets/images/topli.png" width="150" height="150" /></label>
   </li>
 </div>
   <script src="js/displayhladnajela.js"></script>
@@ -142,6 +150,7 @@
       </div>
    
     </form>
+<script src="js/spanClick.js"></script>
 <script src="js/verification.js"></script>
 <script src="js/stopenter.js"></script>
 <script src="js/getdetail.js"></script>
