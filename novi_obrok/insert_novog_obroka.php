@@ -37,7 +37,7 @@
         // Check if file already exists
         if (file_exists($target_file)) {
             header("Location: novi_obrok.php");
-		    $_SESSION['status'] = '<div class="alert alert-danger">' . "Sorry, file already exists." . '</div';
+		    $_SESSION['status'] = '<div class="alert alert-danger">' . "Slika vec postoji." . '</div';
             exit; 
             
             $uploadOk = 0;
@@ -45,7 +45,7 @@
         // Check file size
         if ($_FILES["fileToUpload"]["size"] > 500000) {
             header("Location: novi_obrok.php");
-		    $_SESSION['status'] = '<div class="alert alert-danger">' . "Sorry, your file is too large." . '</div';
+		    $_SESSION['status'] = '<div class="alert alert-danger">' . "Slika je prevelika, maksimalna velicina je 5MB." . '</div';
             exit; 
            
             $uploadOk = 0;           
@@ -54,18 +54,19 @@
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif" ) {
             header("Location: novi_obrok.php");
-            $_SESSION['status'] = '<div class="alert alert-danger">' . "Sorry, only JPG, JPEG, PNG & GIF files are allowed." . '</div';
+            $_SESSION['status'] = '<div class="alert alert-danger">' . "Slika mora biti JPG, JPEG, PNG & GIF formata." . '</div';
             exit;  
             
             $uploadOk = 0;
         }
         if ($uploadOk == 0) {
             header("Location: novi_obrok.php");
-            $_SESSION['status'] = '<div class="alert alert-danger">' . "Sorry, your file was not uploaded." . '</div';
+            $_SESSION['status'] = '<div class="alert alert-danger">' . "Doslo je do greske, slika nije upload-ovana." . '</div';
             exit;
                     
           // if everything is ok, try to upload file
           } else {
+              $target_file = $target_dir . $naziv_obroka . '.' . $imageFileType;
             if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
                
        
