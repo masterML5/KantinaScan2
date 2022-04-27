@@ -99,13 +99,14 @@
             <?php
           }
             ?>
+             </div>
                 <?php
           } 
           else{
-            echo "Niste izabrali obroke za danas";
+            ?> <div> <?php echo  "Niste izabrali  hladna jela za danas";?> </div> <?php
           }
             ?>
-           </div>
+          
          
           <?php
 
@@ -132,13 +133,15 @@
           <?php
         }
           ?>
+          </div>
               <?php
-        }
+        } 
         else{
-          echo "Niste izabrali obroke za danas";
+          ?> <div> <?php echo  "Niste izabrali topla jela za danas";?> </div> <?php
+         
         }
           ?>
-       </div>
+      
 
       
         

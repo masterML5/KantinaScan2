@@ -1,0 +1,29 @@
+body {
+    background-image: url("../assets/images/pozadina.jpg");
+}
+.card {
+    align-items: center;
+ 
+        margin: auto;
+        width: max-content;
+        border: 3px solid silver;
+        padding: 10px;
+        border: 2px solid silver;
+        border-radius: 15px 50px;
+        margin-top: 40px;
+      
+}
+.form-group{
+    margin: 1rem;
+    display: grid;
+}
+.form-group select{
+    width: 100%;
+}
+.actionBtn{
+    display: flex;
+    
+}
+.aBtn{
+    margin: 1rem;
+}
