@@ -100,8 +100,7 @@ include("sidemenu_unos.html");
                 <div  id="status">
                 
                     <?php
-                    if(isset($_SESSION['status'])){
-                        
+                    if(isset($_SESSION['status'])){  
                         echo $_SESSION['status'];
                         unset($_SESSION['status']);
                     }
