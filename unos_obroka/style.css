@@ -27,3 +27,9 @@ body {
 .aBtn{
     margin: 1rem;
 }
+#izaberi_datum{
+    text-align: center;
+}
+.status{
+    border: 1px solid rgba(red, green, blue, alpha);
+}

@@ -72,7 +72,7 @@ session_start();
 		$q = $pdo->prepare($sql);
 		$q->execute(array($datum, $chk, $vrsta_jela, $slika));
 		Database::disconnect();
-		$_SESSION['status'] = "Uspesno ste uneli jela!";
+		$_SESSION['status'] =  '<div class="alert alert-success">' ."Uspesno ste uneli jela!" . '</div';
 		header("Location: unos_obroka.php");
            }
 
@@ -93,7 +93,7 @@ session_start();
 		$q = $pdo->prepare($sql);
 		$q->execute(array($datum, $chk1, $vrsta_jela, $slika2));
 		Database::disconnect();
-		$_SESSION['status'] = "Uspesno ste uneli jela!";
+		$_SESSION['status'] =  '<div class="alert alert-success">' ."Uspesno ste uneli jela!" . '</div';
 		header("Location: unos_obroka.php");
            }
         }
@@ -112,7 +112,7 @@ session_start();
 		$q = $pdo->prepare($sql);
 		$q->execute(array($datum, $chk, $vrsta_jela, $slika));
 		Database::disconnect();
-		$_SESSION['status'] = "Uspesno ste uneli jela!";
+		$_SESSION['status'] =  '<div class="alert alert-success">' ."Uspesno ste uneli jela!" . '</div';
 		header("Location: unos_obroka.php");
            }
            
@@ -130,7 +130,7 @@ session_start();
 		$q = $pdo->prepare($sql);
 		$q->execute(array($datum, $chk2, $vrsta_jela1, $slika2));
 		Database::disconnect();
-		$_SESSION['status'] = "Uspesno ste uneli jela!";
+		$_SESSION['status'] = '<div class="alert alert-success">' ."Uspesno ste uneli jela!" . '</div';
 		header("Location: unos_obroka.php");
            }
 
@@ -147,7 +147,7 @@ session_start();
 				
 			} 
 
-		$_SESSION['status'] = $poruka2 . $poruka;
+		$_SESSION['status'] = '<div class="alert alert-danger">' . $poruka2 . $poruka . '</div';
 		header("Location: unos_obroka.php");
 		exit;
 		
@@ -155,7 +155,7 @@ session_start();
 }
 else{
 	header("Location: unos_obroka.php");
-	$_SESSION['status'] = 'Niste uneli ni jedno jelo!';
+	$_SESSION['status'] = '<div class="alert alert-danger">' . 'Niste uneli ni jedno jelo!' . '</div';
 	exit;
 	
 }

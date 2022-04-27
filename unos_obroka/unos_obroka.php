@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+include("sidemenu_unos.html");
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -85,7 +88,7 @@ session_start();
                        
                     </div>
                     <div class="form-group">
-                        <label>Izaberi datum</label>
+                        <label id="izaberi_datum">Izaberi datum</label>
                         <input class="form-control" type="date" placeholder="Select DateTime" id="datum" name="datum" value="datum" required>
                     </div>
                     <div class="form-group actionBtn">
@@ -94,13 +97,16 @@ session_start();
                     </div>
                         </form>
                 </div>
-                <div id="status">
+                <div  id="status">
+                
                     <?php
                     if(isset($_SESSION['status'])){
+                        
                         echo $_SESSION['status'];
                         unset($_SESSION['status']);
                     }
                     ?>
+                
                 </div>
             </div>
        
