@@ -164,4 +164,7 @@ label img {
 .form-group{
   padding: 0.7rem;
 }
-
+#checkBtn{
+  width: 190px;
+  margin-right: 40px;
+}

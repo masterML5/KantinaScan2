@@ -55,7 +55,7 @@ Swal.fire({
   icon: 'success',
   title: 'Prijatno!',
   showConfirmButton: false,
-  timer: 5000
+  timer: 1000
 })
 
 }

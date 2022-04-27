@@ -152,7 +152,7 @@ include("sidemenu/sidemenu.html");
         <button type="submit"  id="checkBtn" formaction="insert.php" class="btn btn-success aBtn" >Dodaj</button>
         <button type="reset" class="btn btn-danger aBtn" onClick="window.location.reload();">Poništi</button>
         <!-- <a class="btn btn-primary aBtn" href="data/datatables.php" target="_blank">Evidencija/izmena izdatih obroka</a>  -->
-        <button type="button" onClick="location.href='data/datatables.php'" class="btn btn-primary">Evidencija/izmena izdatih obroka</button> 
+        <!-- <button type="button" onClick="location.href='data/datatables.php'" class="btn btn-primary">Evidencija/izmena izdatih obroka</button>  -->
         </div>
       </div>
    

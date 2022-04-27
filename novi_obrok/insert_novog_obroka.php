@@ -54,7 +54,7 @@
         if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
             && $imageFileType != "gif" ) {
             header("Location: novi_obrok.php");
-            $_SESSION['status'] = '<div class="alert alert-danger">' . "Slika mora biti JPG, JPEG, PNG & GIF formata." . '</div';
+            $_SESSION['status'] = '<div class="alert alert-danger">' . "Slika mora biti JPG, JPEG, PNG ili GIF formata." . '</div';
             exit;  
             
             $uploadOk = 0;
