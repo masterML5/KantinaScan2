@@ -1,0 +1,29 @@
+.btnAdd {
+    text-align: right;
+    width: 83%;
+ 
+  }
+  #example_length{
+    margin-top: 10px;
+  }
+  input[type='number'] {
+  -moz-appearance:textfield;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  }
+  .datumi{
+    text-align: center;
+  }
+  #datum_od{
+    margin-right: 10px;
+  }
+  #filter{
+      margin: 10px;
+  }
+  .filters{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+  }

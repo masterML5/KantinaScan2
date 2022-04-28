@@ -5,7 +5,15 @@ $sql = "SELECT * FROM kantina_statistika ";
 
 $totalQuery = mysqli_query($con,$sql);
 $total_all_rows = mysqli_num_rows($totalQuery);
+$b = 0;
+if(isset($_POST['datum_od'],$_POST['datum_do']) && $_POST['datum_od'] != '' && $_POST['datum_do'] != ''){
+	$datum_od = $_POST['datum_od'];
+	$datum_do = $_POST['datum_do'];
+	$sql .= " WHERE datum BETWEEN '$datum_od' AND '$datum_do'";
+	$b = 1;
 
+}
+if($b!=1){
 if(isset($_POST['search']['value']))
 {
 	$search_value = $_POST['search']['value'];
@@ -17,6 +25,7 @@ if(isset($_POST['search']['value']))
 	$sql .= " OR vrsta_bona like '%".$search_value."%'";
 	$sql .= " OR ime_jela like '%".$search_value."%'";
 
+}
 }
 
 if(isset($_POST['order']))
@@ -55,6 +64,8 @@ while($row = mysqli_fetch_assoc($query))
 	$sub_array[] = '<a href="javascript:void();" data-id="'.$row['id'].'"  class="btn btn-info btn-sm editbtn" >Izmeni</a>  <a href="javascript:void();" data-id="'.$row['id'].'"  class="btn btn-danger btn-sm deleteBtn" >Izbriši</a>';
 	$data[] = $sub_array;
 }
+
+
 
 $output = array(
 	'draw'=> intval($_POST['draw']),

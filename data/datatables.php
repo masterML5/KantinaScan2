@@ -9,24 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.10.25/af-2.3.7/date-1.1.0/r-2.2.9/rg-1.1.3/sc-2.0.4/sp-1.3.0/datatables.min.css"/>
   <title>Kantina Statistika</title>
-  <style type="text/css">
-    .btnAdd {
-      text-align: right;
-      width: 83%;
-      margin-bottom: 20px;
-    }
-    #example_length{
-      margin-top: 10px;
-    }
-    input[type='number'] {
-    -moz-appearance:textfield;
-    }
-
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container-fluid">
@@ -35,8 +18,36 @@
     <a href="../index.php" class="btn btn-danger">Povratak nazad</a>
     <div class="row">
       <div class="container">
+        <div class="filters">
+      
+        <div class="datumi">
+          <p>Filtriraj podatke za radnika :</p>
+          
+
+    
+        </div>
+        <div class="datumi">
+          <p>Filtriraj podatke za datum :</p>
+          <label for="datum_od">Datum od:</label>
+          <input type="date" name="datum_od" id="datum_od" >
+          <label for="datum_do">Datum do:</label>
+          <input type="date" name="datum_do"  id="datum_do" ><br>
+          <button type="button" name="filter" id="filter" class="btn btn-info">Filter</button>
+
+    
+        </div>
+        <div class="datumi">
+          <p>Filtriraj podatke za ime jela :</p>
+          
+
+    
+        </div>
+
+        </div>
+      </div>
+      <div class="container">
         <div class="btnAdd">
-         <a href="#!" data-id="" data-bs-toggle="modal" data-bs-target="#addUserModal"   class="btn btn-success btn-sm" >Dodaj ručno obrok</a>
+         <a href="#!" data-id="" data-bs-toggle="modal" data-bs-target="#addUserModal"   class="btn btn-success btn-sm dt-buttons" >Dodaj ručno obrok</a>
        </div>
        <div class="row">
         <div class="col-md-2"></div>
@@ -79,7 +90,13 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
   
   <script type="text/javascript">
+
     $(document).ready(function() {
+
+      datumsort();
+
+      function datumsort(datum_od = '', datum_do = '')
+      {
       $('#example').DataTable({ 
         dom: 'Blfrtip',
         buttons: [
@@ -122,6 +139,7 @@
         'processing':'true',
         'paging':'true',
         'order': [],
+        'searching': 'false',
         
        
         'ordering': true,
@@ -144,6 +162,9 @@
         'ajax': {
           'url':'fetch_data.php',
           'type':'post',
+          'data':{
+            datum_od:datum_od, datum_do:datum_do
+          }
           
           
 
@@ -155,7 +176,21 @@
 
       
       });
+
+    }
+    $('#filter').click(function(){
+        var datum_od = $('#datum_od').val();
+        var datum_do = $('#datum_do').val();
+        if(datum_do != '' && datum_od != ''){
+           $('#example').DataTable().destroy();
+           datumsort(datum_od, datum_do);
+        }
+        else{
+          alert('Morate uneti oba datuma!');
+        }
     });
+  });
+ 
     $(document).ready(function () {
 
 function load() {
@@ -497,6 +532,7 @@ load(); //if you don't want the click
   </div>
 </div>
 <script src="getdetail.js"></script>
+
 </body>
 </html>
 
