@@ -14,6 +14,8 @@ if(isset($_POST['search']['value']))
 	$sql .= " OR datum like '%".$search_value."%'";
 	$sql .= " OR vrsta_obroka like '%".$search_value."%'";
 	$sql .= " OR vrsta_bona like '%".$search_value."%'";
+	$sql .= " OR ime_jela like '%".$search_value."%'";
+
 }
 
 if(isset($_POST['order']))
@@ -21,6 +23,7 @@ if(isset($_POST['order']))
 	$column_name = $_POST['order'][0]['column'];
 	$order = $_POST['order'][0]['dir'];
 	$sql .= " ORDER BY ".$column_name." ".$order."";
+	
 }
 else
 {
@@ -46,6 +49,7 @@ while($row = mysqli_fetch_assoc($query))
 	$sub_array[] = $row['datum'];
 	$sub_array[] = $row['vrsta_obroka'];
 	$sub_array[] = $row['vrsta_bona'];
+	$sub_array[] = $row['ime_jela'];
 	$sub_array[] = '<a href="javascript:void();" data-id="'.$row['id'].'"  class="btn btn-info btn-sm editbtn" >Izmeni</a>  <a href="javascript:void();" data-id="'.$row['id'].'"  class="btn btn-danger btn-sm deleteBtn" >Izbriši</a>';
 	$data[] = $sub_array;
 }

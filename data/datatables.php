@@ -15,6 +15,9 @@
       width: 83%;
       margin-bottom: 20px;
     }
+    #example_length{
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
@@ -38,6 +41,7 @@
             <th>Datum</th>
             <th>Vrsta obroka</th>
             <th>Vrsta bona</th>
+            <th>Ime jela</th>
             <th>Options</th>
           </thead>
           <tbody>
@@ -55,34 +59,51 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.10.25/af-2.3.7/date-1.1.0/r-2.2.9/rg-1.1.3/sc-2.0.4/sp-1.3.0/datatables.min.js"></script>
  <!--Option 2: Separate Popper and Bootstrap JS -->
- <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.2/js/buttons.print.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table-locale-all.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
   
   <script type="text/javascript">
     $(document).ready(function() {
-      $('#example').DataTable({
-        "fnCreatedRow": function( nRow, aData, iDataIndex ) {
-          $(nRow).attr('id', aData[0]);
+      $('#example').DataTable({ 
+        dom: 'Blfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        
+        "createdRow": function( row, data, dataIndex ) {
+          $(row).attr('id', data[0]);
         },
-        'serverSide':'true',
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        'serverSide': true,
         'processing':'true',
         'paging':'true',
-        'order':[],
+        'order': [],
+        'ordering': true,
+        "columnDefs": [{
+          'targets':[7],
+          'orderable' :false
+        }],
+        
         'ajax': {
           'url':'fetch_data.php',
           'type':'post',
+          
+
         },
         
        
-        "columnDefs": [{
-          'target':[5],
-          'orderable' :false,
-        }],
 
-        /* dom: 'Qfrtip' */
+      
+
+      
       });
     });
     $(document).ready(function () {
@@ -109,12 +130,13 @@ load(); //if you don't want the click
       var datum= $('#addDateField').val();
       var broj_kartice= $('#addCardField').val();
       var vrsta_bona = $('#addTypeField').val();
-      if(vrsta_obroka != '' && vrsta_bona != '' && ime_prezime != '' && datum != '' && broj_kartice != '' )
+      var ime_jela = $('#addObrokField').val();
+      if(vrsta_obroka != '' && vrsta_bona != '' && ime_prezime != '' && datum != '' && broj_kartice != '' && ime_jela != '')
       {
        $.ajax({
          url:"add_user.php",
          type:"post",
-         data:{vrsta_obroka:vrsta_obroka,ime_prezime:ime_prezime,datum:datum,broj_kartice:broj_kartice,vrsta_bona:vrsta_bona},
+         data:{vrsta_obroka:vrsta_obroka,ime_prezime:ime_prezime,datum:datum,broj_kartice:broj_kartice,vrsta_bona:vrsta_bona,ime_jela:ime_jela},
          success:function(data)
          {
            var json = JSON.parse(data);
@@ -145,13 +167,14 @@ load(); //if you don't want the click
        var broj_kartice= $('#cardField').val();
        var trid= $('#trid').val();
        var vrsta_bona = $('#typeField').val();
+       var ime_jela = $('#obrokField').val();
        var id= $('#id').val();
-       if(vrsta_obroka != '' && vrsta_bona != '' && ime_prezime != '' && datum != '' && broj_kartice != '' )
+       if(vrsta_obroka != '' && vrsta_bona != '' && ime_prezime != '' && datum != '' && broj_kartice != '' && ime_jela != '')
        {
          $.ajax({
            url:"update_user.php",
            type:"post",
-           data:{vrsta_obroka:vrsta_obroka,ime_prezime:ime_prezime,datum:datum,broj_kartice:broj_kartice,id:id,vrsta_bona:vrsta_bona},
+           data:{vrsta_obroka:vrsta_obroka,ime_prezime:ime_prezime,datum:datum,broj_kartice:broj_kartice,id:id,vrsta_bona:vrsta_bona,ime_jela:ime_jela},
            success:function(data)
            {
              var json = JSON.parse(data);
@@ -167,7 +190,7 @@ load(); //if you don't want the click
               // table.cell(parseInt(trid) - 1,4).data(vrsta_obroka);
               var button =   '<td><a href="javascript:void();" data-id="' +id + '" class="btn btn-info btn-sm editbtn">Izmeni</a>  <a href="#!" data-bs-toggle="modal" data-id="' +id + '" data-bs-target="#exampleModal" class="btn btn-danger btn-sm">Izbriši</a></td>';
               var row = table.row("[id='"+trid+"']");
-              row.row("[id='" + trid + "']").data([id,ime_prezime,broj_kartice,datum,vrsta_obroka,vrsta_bona,button]);
+              row.row("[id='" + trid + "']").data([id,ime_prezime,broj_kartice,datum,vrsta_obroka,vrsta_bona,ime_jela,button]);
               $('#exampleModal').modal('hide');
             }
             else
@@ -200,6 +223,7 @@ load(); //if you don't want the click
        $('#dateField').val(json.datum);
        $('#mealField').val(json.vrsta_obroka);
        $('#typeField').val(json.vrsta_bona);
+       $('#obrokField').val(json.ime_jela);
        $('#id').val(id);
        $('#trid').val(trid);
      }
@@ -284,14 +308,44 @@ load(); //if you don't want the click
            </select>
             </div>
           </div>
+          
           <div class="mb-3 row">
             <label for="typeField" class="col-md-3 form-label">Vrsta bona</label>
             <div class="col-md-9">
-            <select name="vrsta_obroka" id="typeField">
+            <select name="vrsta_bona" id="typeField">
               <option value="redovan" name="redovan">Redovan</option>
               <option value="gosti" name="gosti">Gosti</option>
-              <option value="faktura" name="fakturise_se">Fakturise se</option>
+              <option value="faktura" name="faktura">Fakturise se</option>
                 </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="obrokField" class="col-md-3 form-label">Ime jela</label>
+            <div class="col-md-9">
+            <select class="form-control mb-3 js-example-basic-multiple" name="ime_jela" id="obrokField"  multiple="multiple">
+                            
+                                
+                            <?php
+                            require('connection.php');
+                            $query = "SELECT * FROM obroci WHERE aktivan = true";
+                            $query_run = mysqli_query($con, $query);
+                            if(mysqli_num_rows($query_run) > 0)
+                            {
+                                foreach($query_run as $row){
+                                    ?>
+                                    <option value="<?= $row['ime_obroka'];?>"><?= $row['ime_obroka'];?></option>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                ?>
+                                <option value="">Nema obroka!</option>
+                                <?php
+                            }
+                            ?>
+             </select>
+             <script src="js/select.js"></script>              
             </div>
           </div>
           <div class="text-center">
@@ -337,7 +391,7 @@ load(); //if you don't want the click
             <label for="addMealField" class="col-md-3 form-label">Vrsta obroka</label>
             <div class="col-md-9">
             <select name="vrsta_obroka" id="addMealField">
-              <option value="hladan obrok" name="hladan obrok">Hladan obrok</option>
+              <option value="hladan obrok" name="hladni obrok">Hladan obrok</option>
               <option value="topli obrok" name="topli obrok">Topli obrok</option>
                 </select>
             </div>
@@ -345,16 +399,45 @@ load(); //if you don't want the click
           <div class="mb-3 row">
             <label for="addTypeField" class="col-md-3 form-label">Vrsta bona</label>
             <div class="col-md-9">
-            <select name="vrsta_obroka" id="addTypeField">
+            <select name="vrsta_bona" id="addTypeField">
               <option value="redovan" name="redovan">Redovan</option>
               <option value="gosti" name="gosti">Gosti</option>
-              <option value="faktura" name="fakturise_se">Fakturise se</option>
-                </select>
+              <option value="faktura" name="faktura">Fakturise se</option>
+            </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="addObrokField" class="col-md-3 form-label">Ime jela</label>
+            <div class="col-md-9">
+            <select class="form-control mb-3 js-example-basic-multiple" name="ime_jela" id="addObrokField"  multiple="multiple">
+                            
+                                
+                            <?php
+                            require('connection.php');
+                            $query = "SELECT * FROM obroci WHERE aktivan = true";
+                            $query_run = mysqli_query($con, $query);
+                            if(mysqli_num_rows($query_run) > 0)
+                            {
+                                foreach($query_run as $row){
+                                    ?>
+                                    <option value="<?= $row['ime_obroka'];?>"><?= $row['ime_obroka'];?></option>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                ?>
+                                <option value="">Nema obroka!</option>
+                                <?php
+                            }
+                            ?>
+             </select>
+             <script src="js/select.js"></script>
             </div>
           </div>
           <div class="text-center">
             <button type="submit"  class="btn btn-primary" onClick="window.location.reload();">Dodaj</button>
-            <input onclick="clear_form_elements(this.form)" type="button" value="Clear All" />
+            
            
           
           </div>
@@ -366,8 +449,7 @@ load(); //if you don't want the click
     </div>
   </div>
 </div>
+
 </body>
 </html>
-<script type="text/javascript">
-  //var table = $('#example').DataTable();
-</script>
+
