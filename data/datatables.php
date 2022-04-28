@@ -332,15 +332,15 @@ load(); //if you don't want the click
           <input type="hidden" name="id" id="id" value="">
           <input type="hidden" name="trid" id="trid" value="">
           <div class="mb-3 row">
-            <label for="nameField" class="col-md-3 form-label">Ime Prezime</label>
+            <label for="nameField"   class="col-md-3 form-label">Ime Prezime</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" id="nameField" name="name" >
+              <input type="text" onkeyup="GetDetail3(this.value)" class="form-control" id="nameField" name="name" >
             </div>
           </div>
           <div class="mb-3 row">
             <label for="cardField" class="col-md-3 form-label">Broj kartice</label>
             <div class="col-md-9">
-              <input type="number" class="form-control" id="cardField" name="email">
+              <input type="number"  onkeyup="GetDetail4(this.value)" class="form-control" id="cardField" name="email">
             </div>
           </div>
           <div class="mb-3 row">

@@ -1,7 +1,7 @@
 
   function GetDetail3(str){
     if(str.length == 0){
-      document.getElementById("image").src = "";
+      document.getElementById("cardField").value = "";
       return;
     }
     else{
@@ -9,7 +9,7 @@
       xmlhttp.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
           var myObj = JSON.parse(this.responseText);
-          document.getElementById("image").src = myObj[0];
+          document.getElementById("cardField").value = myObj[0];
         }
       };
       xmlhttp.open("GET", "search3.php?Name=" + str, true);
@@ -37,7 +37,7 @@
 
   function GetDetail4(str){
     if(str.length == 0){
-      document.getElementById("image").src = "";
+      document.getElementById("nameField").value = "";
       return;
     }
     else{
@@ -45,7 +45,7 @@
       xmlhttp.onreadystatechange = function() {
         if(this.readyState == 4 && this.status == 200) {
           var myObj = JSON.parse(this.responseText);
-          document.getElementById("image").src = myObj[0];
+          document.getElementById("nameField").value = myObj[0];
         }
       };
       xmlhttp.open("GET", "search4.php?CardNumber=" + str, true);
