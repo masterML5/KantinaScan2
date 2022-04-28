@@ -29,7 +29,7 @@ if(isset($_POST['order']))
 }
 else
 {
-	$sql .= " ORDER BY ime_jela desc";
+	$sql .= " ORDER BY id desc";
 }
 
 if($_POST['length'] != -1)
