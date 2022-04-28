@@ -104,7 +104,7 @@ include("sidemenu/sidemenu.html");
                 <?php
           } 
           else{
-            ?> <div> <?php echo  "Niste izabrali  hladna jela za danas";?> </div> <?php
+            ?> <div class="alert alert-danger"> <?php echo  "Niste izabrali  hladna jela za danas";?> </div> <?php
           }
             ?>
           
@@ -138,7 +138,7 @@ include("sidemenu/sidemenu.html");
               <?php
         } 
         else{
-          ?> <div> <?php echo  "Niste izabrali topla jela za danas";?> </div> <?php
+          ?> <div class="alert alert-danger"> <?php echo  "Niste izabrali topla jela za danas";?> </div> <?php
          
         }
           ?>

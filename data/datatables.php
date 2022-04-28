@@ -18,6 +18,14 @@
     #example_length{
       margin-top: 10px;
     }
+    input[type='number'] {
+    -moz-appearance:textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    }
   </style>
 </head>
 <body>
@@ -414,13 +422,13 @@ load(); //if you don't want the click
           <div class="mb-3 row">
             <label for="addUserField" class="col-md-3 form-label">Ime Prezime</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" id="addUserField" name="name" >
+              <input type="text" class="form-control"  onkeyup="GetDetail(this.value)" id="addUserField" name="name" >
             </div>
           </div>
           <div class="mb-3 row">
             <label for="addCardField" class="col-md-3 form-label">Broj kartice</label>
             <div class="col-md-9">
-              <input type="number" class="form-control" id="addCardField" name="email">
+              <input type="number" class="form-control"  onkeyup="GetDetail2(this.value)" id="addCardField" name="email">
             </div>
           </div>
           <div class="mb-3 row">
@@ -479,9 +487,6 @@ load(); //if you don't want the click
           </div>
           <div class="text-center">
             <button type="submit"  class="btn btn-primary" onClick="window.location.reload();">Dodaj</button>
-            
-           
-          
           </div>
         </form> 
       </div>
@@ -491,7 +496,7 @@ load(); //if you don't want the click
     </div>
   </div>
 </div>
-
+<script src="getdetail.js"></script>
 </body>
 </html>
 
