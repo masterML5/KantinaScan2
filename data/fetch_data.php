@@ -10,6 +10,7 @@ if(isset($_POST['search']['value']))
 {
 	$search_value = $_POST['search']['value'];
 	$sql .= " WHERE ime_prezime like '%".$search_value."%'";
+	$sql .= " OR id like '%".$search_value."%'";
 	$sql .= " OR broj_kartice like '%".$search_value."%'";
 	$sql .= " OR datum like '%".$search_value."%'";
 	$sql .= " OR vrsta_obroka like '%".$search_value."%'";
@@ -21,13 +22,14 @@ if(isset($_POST['search']['value']))
 if(isset($_POST['order']))
 {
 	$column_name = $_POST['order'][0]['column'];
+	$a = $_POST['columns'][$column_name]['name'];
 	$order = $_POST['order'][0]['dir'];
-	$sql .= " ORDER BY ".$column_name." ".$order."";
-	
+	$sql .= " ORDER BY ".$a." ".$order."";
+
 }
 else
 {
-	$sql .= " ORDER BY id desc";
+	$sql .= " ORDER BY ime_jela desc";
 }
 
 if($_POST['length'] != -1)

@@ -75,8 +75,35 @@
       $('#example').DataTable({ 
         dom: 'Blfrtip',
         buttons: [
-            'copy', 'excel', 'pdf', 'print'
-        ],
+            {
+                extend: 'print',
+                exportOptions:{
+                  columns: [1,2,3,4,5,6]
+                }
+            },
+            {
+              extend: 'excel',
+                exportOptions:{
+                  columns: [1,2,3,4,5,6]
+                }
+            },
+            {
+              extend: 'copy',
+                exportOptions:{
+                  columns: [1,2,3,4,5,6]
+                }
+            },
+            {
+              extend: 'pdf',
+                exportOptions:{
+                  columns: [1,2,3,4,5,6]
+                }
+            },
+
+
+
+            ],
+       
         
         
         "createdRow": function( row, data, dataIndex ) {
@@ -87,16 +114,29 @@
         'processing':'true',
         'paging':'true',
         'order': [],
+        
        
         'ordering': true,
         "columnDefs": [{
           'targets':[7],
           'orderable' :false
-        }],
+        },
+        
+        { "name": "id",   "targets": 0 },
+        { "name": "ime_prezime",  "targets": 1 },
+        { "name": "broj_kartice", "targets": 2 },
+        { "name": "datum", "targets": 3 },
+        { "name": "vrsta_obroka",  "targets": 4 },
+        { "name": "vrsta_bona",    "targets": 5 },
+        { "name": "ime_jela",    "targets": 6 },
+
+        ],
+        
         
         'ajax': {
           'url':'fetch_data.php',
           'type':'post',
+          
           
 
         },
