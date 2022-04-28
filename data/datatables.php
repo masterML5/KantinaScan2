@@ -22,8 +22,8 @@
 </head>
 <body>
   <div class="container-fluid">
-    <h2 class="text-center">Statistika</h2>
-    <p class="datatable design text-center">Obroka u kantini</p>
+    <h2 class="text-center">Statistika obroka u kantini</h2>
+    <p class="datatable design text-center">Izvestaji i izmene obroka</p>
     <a href="../index.php" class="btn btn-danger">Povratak nazad</a>
     <div class="row">
       <div class="container">
@@ -75,8 +75,9 @@
       $('#example').DataTable({ 
         dom: 'Blfrtip',
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'copy', 'excel', 'pdf', 'print'
         ],
+        
         
         "createdRow": function( row, data, dataIndex ) {
           $(row).attr('id', data[0]);
@@ -86,6 +87,7 @@
         'processing':'true',
         'paging':'true',
         'order': [],
+       
         'ordering': true,
         "columnDefs": [{
           'targets':[7],
@@ -345,7 +347,7 @@ load(); //if you don't want the click
                             }
                             ?>
              </select>
-             <script src="js/select.js"></script>              
+                        
             </div>
           </div>
           <div class="text-center">
@@ -432,7 +434,7 @@ load(); //if you don't want the click
                             }
                             ?>
              </select>
-             <script src="js/select.js"></script>
+           
             </div>
           </div>
           <div class="text-center">
