@@ -44,3 +44,10 @@
     
     margin-left: 8rem;
   }
+.select2 select2-container select2-container--default select2-container--below{
+    width: 260px;
+  }
+  .select2-container .select2-selection--single .select2-selection__rendered{
+    padding-right: 0px;
+    margin-left: 3rem;
+  }

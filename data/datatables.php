@@ -19,13 +19,15 @@
     <a href="../index.php" class="btn btn-danger">Povratak nazad</a>
     <div class="row">
       <div class="container">
+        <form>
+          <div class="form-group">
         <div class="filters">
       
         <div class="datumi">
           <p>Filtriraj podatke za radnika :</p>
           <div class="ime_radnika">
           <label for="ime_radnika" class="ime_radnika_label" >Ime radnika :</label>
-          <select class="form-control mb-3 js-example-basic-multiple" name="obrok_hladan[]" >
+          <select class="form-control mb-3 js-example-basic-multiple" name="ime_radnika" >
                             
                                 
                             <?php
@@ -65,7 +67,7 @@
           <p>Filtriraj podatke za ime jela :</p>
           <div class="ime_radnika">
           <label for="ime_radnika" class="ime_radnika_label" >Obrok :</label>
-          <select class="form-control mb-3 js-example-basic-multiple" name="obrok_hladan[]" >
+          <select class="form-control mb-3 js-example-basic-multiple" name="obrok" >
                             
                                 
                             <?php
@@ -93,6 +95,8 @@
     
         </div>
 
+        </div>
+        <form>
         </div>
       </div>
       <div class="container">
