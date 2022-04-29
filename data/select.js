@@ -6,13 +6,19 @@ $(document).ready(function() {
         
        
     });
-    const dropdown = document.querySelectorAll('.select2-dropdown, .select2-dropdown--below');
-
-    dropdown.removeAttr(style);
 
 
 }
 );
 
+
+// console.log(previous);
+
+
+// const predhodna = previous.nextElementSibling;
+
+// console.log(predhodna);
+
+// previous.innerText("Predhodna");
 
 

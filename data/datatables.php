@@ -201,14 +201,27 @@
         "createdRow": function( row, data, dataIndex ) {
           $(row).attr('id', data[0]);
         },
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Sve"]],
         'serverSide': true,
         'processing':'true',
         'paging':'true',
         'order': [],
         'searching': 'false',
-        
        
+        "language": {
+        "paginate": {
+        "previous": "Predhodna",
+        "next": "Sledeća"
+        },
+        "emptyTable":       "Nema podataka!",
+        "info":             "Prikazano _END_ od ukupno _TOTAL_ podataka",
+        "infoEmpty":        "Nema podataka!",
+        "infoFiltered":     "(Broj rezultata pretrage : _MAX_ )",
+        "search": "Pretraži :",
+        "lengthMenu": "Prikaži _MENU_ podataka"
+        },
+       
+
         'ordering': true,
         "columnDefs": [{
           'targets':[7],
