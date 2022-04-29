@@ -41,12 +41,6 @@
     
   }
   .ime_radnika_label{
-    margin: 0.7rem;
+    
     margin-left: 8rem;
-  }
-  body > div.container-fluid > div > div:nth-child(1) > div > div:nth-child(3) > div > span > span.selection > span{
-    margin-top: 0.6rem;
-  }
-  body > div.container-fluid > div > div:nth-child(1) > div > div:nth-child(1) > div > span > span.selection > span{
-    margin-top: 0.6rem;
   }
