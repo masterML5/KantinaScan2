@@ -8,6 +8,7 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.10.25/af-2.3.7/date-1.1.0/r-2.2.9/rg-1.1.3/sc-2.0.4/sp-1.3.0/datatables.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <title>Kantina Statistika</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -22,9 +23,33 @@
       
         <div class="datumi">
           <p>Filtriraj podatke za radnika :</p>
+          <div class="ime_radnika">
+          <label for="ime_radnika" class="ime_radnika_label" >Ime radnika :</label>
+          <select class="form-control mb-3 js-example-basic-multiple" name="obrok_hladan[]" >
+                            
+                                
+                            <?php
+                            require('../connection.php');
+                            $query = "SELECT * FROM users";
+                            $query_run = mysqli_query($con, $query);
+                            if(mysqli_num_rows($query_run) > 0)
+                            {
+                                foreach($query_run as $row){
+                                    ?>
+                                    <option value="<?= $row['ime_prezime'];?>"><?= $row['ime_prezime'];?></option>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                ?>
+                                <option value="">Nema obroka!</option>
+                                <?php
+                            }
+                            ?>
+            </select>
+            </div>
           
-
-    
         </div>
         <div class="datumi">
           <p>Filtriraj podatke za datum :</p>
@@ -38,7 +63,32 @@
         </div>
         <div class="datumi">
           <p>Filtriraj podatke za ime jela :</p>
-          
+          <div class="ime_radnika">
+          <label for="ime_radnika" class="ime_radnika_label" >Obrok :</label>
+          <select class="form-control mb-3 js-example-basic-multiple" name="obrok_hladan[]" >
+                            
+                                
+                            <?php
+                            require('../connection.php');
+                            $query = "SELECT * FROM obroci";
+                            $query_run = mysqli_query($con, $query);
+                            if(mysqli_num_rows($query_run) > 0)
+                            {
+                                foreach($query_run as $row){
+                                    ?>
+                                    <option value="<?= $row['ime_obroka'];?>"><?= $row['ime_obroka'];?></option>
+                                    <?php
+                                }
+                            }
+                            else
+                            {
+                                ?>
+                                <option value="">Nema obroka!</option>
+                                <?php
+                            }
+                            ?>
+            </select>
+            </div>
 
     
         </div>
@@ -88,7 +138,8 @@
 <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table-locale-all.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
-  
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="select.js"></script>
   <script type="text/javascript">
 
     $(document).ready(function() {

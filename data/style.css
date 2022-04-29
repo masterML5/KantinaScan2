@@ -27,3 +27,26 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
   }
+  .datumi span{
+    width: auto;
+    text-align: center;
+    margin: auto;
+    margin-right: 5rem;
+  
+    margin-left: 0;
+  }
+  .ime_radnika{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+  }
+  .ime_radnika_label{
+    margin: 0.7rem;
+    margin-left: 8rem;
+  }
+  body > div.container-fluid > div > div:nth-child(1) > div > div:nth-child(3) > div > span > span.selection > span{
+    margin-top: 0.6rem;
+  }
+  body > div.container-fluid > div > div:nth-child(1) > div > div:nth-child(1) > div > span > span.selection > span{
+    margin-top: 0.6rem;
+  }
