@@ -60,8 +60,8 @@
           <input type="date" name="datum_od" id="datum_od" >
           <label for="datum_do">Datum do:</label>
           <input type="date" name="datum_do"  id="datum_do" ><br>
-          <button type="button" name="filter" id="filter" class="btn btn-info">Filter</button>
-          <button type="button" name="reset" id="reset" onClick="window.location.reload();" class="btn btn-danger">Reset</button>
+          <button type="button" name="filter" id="filter" class="btn btn-info">Pretraži</button>
+          <button type="button" name="reset" id="reset" onClick="window.location.reload();" class="btn btn-danger">Poništi</button>
 
     
         </div>

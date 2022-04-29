@@ -15,6 +15,7 @@ if(isset($_POST['ime_radnika'], $_POST['obrok'], $_POST['datum_od'],$_POST['datu
 	$datum_do = $_POST['datum_do'];
 	$sql .= " WHERE ime_prezime like '%".$ime_radnika."%'";
 	$sql .= " AND ime_jela like '%".$obrok."'";
+	
 	$b=1;
 }
 if(isset($_POST['ime_radnika'], $_POST['obrok'], $_POST['datum_od'],$_POST['datum_do']) && (($_POST['ime_radnika'] === '' && $_POST['obrok'] === '') && ($_POST['datum_od'] != '' && $_POST['datum_do'] === '' ))){
