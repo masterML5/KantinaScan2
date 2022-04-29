@@ -26,6 +26,8 @@
   .filters{
       display: grid;
       grid-template-columns: repeat(3, 1fr);
+      margin-left: 229px;
+    margin-right: 150px;
   }
   .datumi span{
     width: auto;
@@ -42,12 +44,17 @@
   }
   .ime_radnika_label{
     
-    margin-left: 8rem;
+    margin-left: 3.5rem;
   }
-.select2 select2-container select2-container--default select2-container--below{
+.select2.select2-container.select2-container--default.select2-container--below{
     width: 260px;
   }
   .select2-container .select2-selection--single .select2-selection__rendered{
     padding-right: 0px;
-    margin-left: 3rem;
+    margin-left: 0rem;
+  }
+
+  span.select2-dropdown.select2-dropdown--below{
+    width: 173px !important;
+    text-align: center;
   }

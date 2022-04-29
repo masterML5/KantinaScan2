@@ -27,7 +27,7 @@
           <p>Filtriraj podatke za radnika :</p>
           <div class="ime_radnika">
           <label for="ime_radnika" class="ime_radnika_label" >Ime radnika :</label>
-          <select class="form-control mb-3 js-example-basic-multiple" name="ime_radnika" >
+          <select class="form-control mb-3 js-example-basic-multiple" id="ime_radnika" name="ime_radnika" >
                             
                                 
                             <?php
@@ -38,6 +38,7 @@
                             {
                                 foreach($query_run as $row){
                                     ?>
+                                    <option selected="selected"></option>
                                     <option value="<?= $row['ime_prezime'];?>"><?= $row['ime_prezime'];?></option>
                                     <?php
                                 }
@@ -60,6 +61,7 @@
           <label for="datum_do">Datum do:</label>
           <input type="date" name="datum_do"  id="datum_do" ><br>
           <button type="button" name="filter" id="filter" class="btn btn-info">Filter</button>
+          <button type="button" name="reset" id="reset" onClick="window.location.reload();" class="btn btn-danger">Reset</button>
 
     
         </div>
@@ -67,7 +69,7 @@
           <p>Filtriraj podatke za ime jela :</p>
           <div class="ime_radnika">
           <label for="ime_radnika" class="ime_radnika_label" >Obrok :</label>
-          <select class="form-control mb-3 js-example-basic-multiple" name="obrok" >
+          <select class="form-control mb-3 js-example-basic-multiple"  id="obrok" name="obrok" >
                             
                                 
                             <?php
@@ -78,6 +80,7 @@
                             {
                                 foreach($query_run as $row){
                                     ?>
+                                    <option selected="selected"></option>
                                     <option value="<?= $row['ime_obroka'];?>"><?= $row['ime_obroka'];?></option>
                                     <?php
                                 }
@@ -97,6 +100,7 @@
 
         </div>
         <form>
+         
         </div>
       </div>
       <div class="container">
@@ -150,31 +154,39 @@
 
       datumsort();
 
-      function datumsort(datum_od = '', datum_do = '')
+      function datumsort(datum_od = '', datum_do = '', ime_radnika = '', obrok = '')
       {
       $('#example').DataTable({ 
         dom: 'Blfrtip',
         buttons: [
             {
                 extend: 'print',
+                text: 'Štampaj',
+                className: 'btn btn-primary',
                 exportOptions:{
                   columns: [1,2,3,4,5,6]
                 }
             },
             {
               extend: 'excel',
+              text: 'Izvezi u excel',
+              className: 'btn btn-primary',
                 exportOptions:{
                   columns: [1,2,3,4,5,6]
                 }
             },
             {
               extend: 'copy',
+              text: 'Kopiraj',
+              className: 'btn btn-primary',
                 exportOptions:{
                   columns: [1,2,3,4,5,6]
                 }
             },
             {
               extend: 'pdf',
+              text: 'Izvezi u pdf',
+              className: 'btn btn-primary',
                 exportOptions:{
                   columns: [1,2,3,4,5,6]
                 }
@@ -218,7 +230,7 @@
           'url':'fetch_data.php',
           'type':'post',
           'data':{
-            datum_od:datum_od, datum_do:datum_do
+            datum_od:datum_od, datum_do:datum_do, ime_radnika:ime_radnika, obrok:obrok
           }
           
           
@@ -236,14 +248,17 @@
     $('#filter').click(function(){
         var datum_od = $('#datum_od').val();
         var datum_do = $('#datum_do').val();
-        if(datum_do != '' && datum_od != ''){
+        var ime_radnika = $('#ime_radnika').val();
+        var obrok = $('#obrok').val();
+        if(datum_do != '' || datum_od != '' || ime_radnika != '' || obrok != ''){
            $('#example').DataTable().destroy();
-           datumsort(datum_od, datum_do);
+           datumsort(datum_od, datum_do, ime_radnika, obrok);
         }
         else{
-          alert('Morate uneti oba datuma!');
+          alert('Unesite barem jedan kriterijum za pretragu!');
         }
     });
+
   });
  
     $(document).ready(function () {
@@ -462,7 +477,7 @@ load(); //if you don't want the click
           <div class="mb-3 row">
             <label for="obrokField" class="col-md-3 form-label">Ime jela</label>
             <div class="col-md-9">
-            <select class="form-control mb-3 js-example-basic-multiple" name="ime_jela" id="obrokField"  multiple="multiple">
+            <select class="form-control mb-3" name="ime_jela" id="obrokField">
                             
                                 
                             <?php
@@ -549,7 +564,7 @@ load(); //if you don't want the click
           <div class="mb-3 row">
             <label for="addObrokField" class="col-md-3 form-label">Ime jela</label>
             <div class="col-md-9">
-            <select class="form-control mb-3 js-example-basic-multiple" name="ime_jela" id="addObrokField"  multiple="multiple">
+            <select class="form-control mb-3 " name="ime_jela" id="addObrokField"  multiple="multiple">
                             
                                 
                             <?php
