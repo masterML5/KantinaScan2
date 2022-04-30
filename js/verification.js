@@ -12,6 +12,7 @@ var checkedNum = $('input[name="ime_jela[]"]:checked').length;
 
 
 
+
 if(name == '' || card == '') {
     Swal.fire({
       icon: 'error',
@@ -48,17 +49,15 @@ else if(checkedNum > 1){
   })
   return false;
 }
-
-else{
-Swal.fire({
+ else{
+ Swal.fire({
   position: 'center',
   icon: 'success',
   title: 'Prijatno!',
   showConfirmButton: false,
-  timer: 1000
-})
+  timer: 1000 })
 
-}
+ }
 
 
 })

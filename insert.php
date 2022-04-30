@@ -1,6 +1,8 @@
 <?php
+session_start();
      
     require 'connect.php';
+	require 'connection.php';
  
     if ( !empty($_POST)) {
         // keep track post values
@@ -10,7 +12,17 @@
         $vrsta_obroka = $_POST['vrsta_obroka']; 
 		$ime_jela = $_POST['ime_jela'];
 		$vrsta_bonova = $_POST['vrsta_bona'];
+		global $vreme_obroka;
 		
+
+	$sqlcheck = "SELECT * FROM kantina_statistika WHERE ime_prezime like '$ime_prezime' AND broj_kartice like $broj_kartice AND CURRENT_TIMESTAMP < vreme_obroka + INTERVAL 12 HOUR";
+	
+	
+	$query = mysqli_query($con, $sqlcheck);
+	$fetch_data = mysqli_fetch_assoc($query);
+	$vreme_obroka = $fetch_data['vreme_obroka'];
+	
+	if(mysqli_num_rows($query) < 1){
         
 		// insert data
 		$chk="";  
@@ -34,4 +46,11 @@
 		Database::disconnect();
 		header("Location: index.php");
     }
+	else{
+		$_SESSION['status'] = '<div class="alert alert-danger">' ."Osoba " . $ime_prezime . " je evidentirana u predhodnih 12h! <br> Jela je zadnji put u " . $vreme_obroka . " <br> Podaci nisu poslati!" . '</div';
+		header("Location: index.php");
+		exit;
+	}
+}
+
 ?>

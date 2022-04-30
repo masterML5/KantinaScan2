@@ -1,5 +1,7 @@
 <?php
+session_start();
 include("sidemenu/sidemenu.html");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -143,7 +145,7 @@ include("sidemenu/sidemenu.html");
         }
           ?>
       
-
+     
       
         
 
@@ -154,6 +156,16 @@ include("sidemenu/sidemenu.html");
         <!-- <a class="btn btn-primary aBtn" href="data/datatables.php" target="_blank">Evidencija/izmena izdatih obroka</a>  -->
         <!-- <button type="button" onClick="location.href='data/datatables.php'" class="btn btn-primary">Evidencija/izmena izdatih obroka</button>  -->
         </div>
+        <div  id="status">
+                
+                <?php
+                if(isset($_SESSION['status'])){  
+                    echo $_SESSION['status'];
+                    unset($_SESSION['status']);
+                }
+                ?>
+            
+      </div>
       </div>
    
     </form>
@@ -162,6 +174,7 @@ include("sidemenu/sidemenu.html");
 <script src="js/verification.js"></script>
 <script src="js/stopenter.js"></script>
 <script src="js/getdetail.js"></script>
+<script src="js/status.js"></script>
 
 </body>
 
