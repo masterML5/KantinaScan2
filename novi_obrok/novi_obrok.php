@@ -31,7 +31,7 @@ include('sidemenu_novi_obrok.html');
                     </div>
                     <div class="form-group">
                         <label for="">Slika obroka</label>
-                        <input type="file" name="fileToUpload" id="fileToUpload" class="form-control">
+                        <input type="file" name="fileToUpload" id="fileToUpload" class="form-control" required>
                     </div>
                     <div class="form-group">
                       <label for="">Vrsta obroka</label>

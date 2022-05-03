@@ -209,7 +209,7 @@ $(document).ready(function(){
 					labels:language,
 					datasets:[
 						{
-							label:'Vote',
+							label:'',
 							backgroundColor:color,
 							color:'#fff',
 							data:total
@@ -225,10 +225,7 @@ $(document).ready(function(){
 								min:0
 							}
 						}]
-					},
-                    plugins: {
-            
-        			}
+					},                  
 				};
 
 			

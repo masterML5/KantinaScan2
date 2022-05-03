@@ -10,6 +10,7 @@ require '../connection.php';
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 		<script src="https://www.chartjs.org/samples/2.9.4/utils.js"></script>
+		<link rel="stylesheet" href="style.css">
 		
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
 	</head>
@@ -68,7 +69,7 @@ require '../connection.php';
 										echo "Nema hladnih obroka za danas";
 									}
 									else{
-										echo $fetch_data['Total'] . ' izdatih obroka';
+										echo '<span>' . $fetch_data['Total'] . '</span> izdatih obroka';
 									}
 
 
@@ -86,7 +87,7 @@ require '../connection.php';
 										echo "Nema toplih obroka za danas";
 									}
 									else{
-										echo $fetch_data['Total'] . ' izdatih obroka';
+										echo '<span>' . $fetch_data['Total'] . '</span> izdatih obroka';
 									}
 
 
@@ -110,7 +111,7 @@ require '../connection.php';
 										echo "Nema hladnih obroka za danas";
 									}
 									else{
-										echo $fetch_data['Total'] . ' izdatih obroka';
+										echo '<span>' . $fetch_data['Total'] . '</span> izdatih obroka';
 									}
 
 
@@ -128,7 +129,7 @@ require '../connection.php';
 										echo "Nema gosti bona za danas";
 									}
 									else{
-										echo $fetch_data['Total'] . ' izdatih obroka';
+										echo '<span>' . $fetch_data['Total'] . '</span> izdatih obroka';
 									}
 
 
@@ -146,7 +147,7 @@ require '../connection.php';
 										echo "Nema faktura bona za danas";
 									}
 									else{
-										echo $fetch_data['Total'] . ' izdatih obroka';
+										echo '<span>' . $fetch_data['Total'] . '</span> izdatih obroka';
 									}
 
 
@@ -169,7 +170,7 @@ require '../connection.php';
 									foreach ($query as $obrok){
 
 										?>
-										<p> <?= $obrok['ime_jela']; ?> : <?= $obrok['Total'];?> izdatih jela </p>
+										<p> <?= $obrok['ime_jela']; ?> : <span> <?= $obrok['Total'];?></span> izdatih jela </p>
 										<?php
 									}
 									
