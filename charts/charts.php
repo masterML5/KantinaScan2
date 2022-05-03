@@ -19,7 +19,9 @@ require '../connection.php';
 
 			
 		</div>
+		
 		<div class="container-fluid">
+		<a href="../index.php" class="btn btn-danger">Povratak nazad</a>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="card mt-4">
