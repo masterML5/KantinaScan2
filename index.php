@@ -95,7 +95,7 @@ include("sidemenu/sidemenu.html");
           <label class="naslov" for="<?= $vrstajelahladan['id_vrsta_jela'];?>">
           <input id="<?= $vrstajelahladan['id_vrsta_jela'];?>" type="checkbox"  class="x" name="ime_jela[]" value="<?= $vrstajelahladan['ime_jela'];?>"/><span><?= $vrstajelahladan['ime_jela'];?><span>
           </label>
-          <label class="labelcheckbox y" for="<?= $vrstajelahladan['id_vrsta_jela'];?>"><img src="<?= $vrstajelahladan['slika'];?>" width="150" height="150">
+          <label class="labelcheckbox y" for="<?= $vrstajelahladan['id_vrsta_jela'];?>"><img src="<?= $vrstajelahladan['slika'];?>" width="150" height="150">         
           </label>
           </article>
         

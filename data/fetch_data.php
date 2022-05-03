@@ -51,6 +51,17 @@ if(isset($_POST['ime_radnika'], $_POST['obrok'], $_POST['datum_od'],$_POST['datu
 	
 	$b=1;
 }
+if(isset($_POST['ime_radnika'], $_POST['obrok'], $_POST['datum_od'],$_POST['datum_do']) && (($_POST['ime_radnika'] === '' || $_POST['obrok'] === '') && ($_POST['datum_od'] != '' && $_POST['datum_do'] != '' ))){
+	$ime_radnika = $_POST['ime_radnika'];
+	$obrok = $_POST['obrok'];
+	$datum_od = $_POST['datum_od'];
+	$datum_do = $_POST['datum_do'];
+	$sql .= " WHERE ime_prezime like '%".$ime_radnika."'";
+	$sql .= " AND ime_jela like '%".$obrok."'";
+	$sql .= " AND datum BETWEEN '$datum_od' AND '$datum_do' ";
+	
+	$b=1;
+}
 if(isset($_POST['search']['value']) && $_POST['search']['value'] != '')
 {	
 	if($b == 1){

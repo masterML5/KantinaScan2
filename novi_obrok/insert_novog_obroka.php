@@ -35,6 +35,13 @@
         //     $uploadOk = 0;
         // }
         // Check if file already exists
+        if(empty($target_file)){
+            header("Location: novi_obrok.php");
+		    $_SESSION['status'] = '<div class="alert alert-danger">' . "Unesite sliku." . '</div';
+            exit;
+            $uploadOk = 0;
+        }
+       
         if (file_exists($target_file)) {
             header("Location: novi_obrok.php");
 		    $_SESSION['status'] = '<div class="alert alert-danger">' . "Slika vec postoji." . '</div';
@@ -43,7 +50,7 @@
             $uploadOk = 0;
         }   
         // Check file size
-        if ($_FILES["fileToUpload"]["size"] > 500000) {
+        if ($_FILES["fileToUpload"]["size"] > 5000000) {
             header("Location: novi_obrok.php");
 		    $_SESSION['status'] = '<div class="alert alert-danger">' . "Slika je prevelika, maksimalna velicina je 5MB." . '</div';
             exit; 
@@ -74,7 +81,7 @@
          $slika = substr($target_file, 3);
           
 		// insert data
-
+            
 		
 	
 

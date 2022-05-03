@@ -55,15 +55,19 @@ session_start();
 
 
 		if($obrok_topli === NULL && !empty($obrok_hladan)){
-            
+	    
         
 		// insert data
 		$chk="";  
 		foreach($obrok_hladan as $chk1)  
    		{  
+			
       		$chk = $chk1;  
+			$sqlSlika = "SELECT * FROM obroci WHERE ime_obroka = '$chk' ";
+			$querySlika = mysqli_query($con, $sqlSlika);
+			$fetchSlika = mysqli_fetch_assoc($querySlika);
             $vrsta_jela = 'hladan'; 
-            $slika = "assets/images/$chk.jpg";
+            $slika = $fetchSlika['slika_obroka'];
   		  
 		
         $pdo = Database::connect();
@@ -83,8 +87,11 @@ session_start();
 		foreach($obrok_topli as $chk1)  
    		{  
       		$chk = $chk1;  
+			$sqlSlika = "SELECT * FROM obroci WHERE ime_obroka = '$chk' ";
+			$querySlika = mysqli_query($con, $sqlSlika);
+			$fetchSlika = mysqli_fetch_assoc($querySlika);
             $vrsta_jela = 'topli'; 
-            $slika2 = "assets/images/$chk.jpg";
+            $slika2 = $fetchSlika['slika_obroka'];
   		  
 
         $pdo = Database::connect();
@@ -102,8 +109,11 @@ session_start();
 		foreach($obrok_hladan as $chk1)  
    		{  
       		$chk = $chk1;  
+			$sqlSlika = "SELECT * FROM obroci WHERE ime_obroka = '$chk' ";
+			$querySlika = mysqli_query($con, $sqlSlika);
+			$fetchSlika = mysqli_fetch_assoc($querySlika);
             $vrsta_jela = 'hladan'; 
-            $slika = "assets/images/$chk.jpg";
+            $slika = $fetchSlika['slika_obroka'];
   		  
 
         $pdo = Database::connect();
@@ -120,8 +130,11 @@ session_start();
 		foreach($obrok_topli as $chk2)  
    		{  
       		$chk3 = $chk2;  
+			$sqlSlika = "SELECT * FROM obroci WHERE ime_obroka = '$chk3' ";
+			$querySlika = mysqli_query($con, $sqlSlika);
+			$fetchSlika = mysqli_fetch_assoc($querySlika);
             $vrsta_jela1 = 'topli'; 
-            $slika2 = "assets/images/$chk3.jpg";
+            $slika2 = $fetchSlika['slika_obroka'];
   		  
 
         $pdo = Database::connect();
