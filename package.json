@@ -1,12 +1,11 @@
 {
-  "name": "package",
+  "name": "kantinascan",
   "version": "1.0.0",
-  "description": "",
-  "main": "non-empty.js",
+  "description": "Kantina Pionir",
   "dependencies": {
     "bootstrap-select": "^1.13.18",
-    "kioskboard": "^2.2.0",
-    "sweetalert": "^2.1.2"
+    "sweetalert": "^2.1.2",
+    "type": "module"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,10 +14,12 @@
     "type": "git",
     "url": "git+https://github.com/masterML5/KantinaScan2.git"
   },
-  "author": "",
+  "author": "Milos Jelic",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/masterML5/KantinaScan2/issues"
   },
-  "homepage": "https://github.com/masterML5/KantinaScan2#readme"
+  "homepage": "https://github.com/masterML5/KantinaScan2#readme",
+  "main": "index.js",
+  "devDependencies": {}
 }

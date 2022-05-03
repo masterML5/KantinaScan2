@@ -17,12 +17,14 @@ session_start();
 
 	$sqlcheck = "SELECT * FROM kantina_statistika WHERE ime_prezime like '$ime_prezime' AND broj_kartice like $broj_kartice AND CURRENT_TIMESTAMP < vreme_obroka + INTERVAL 12 HOUR";
 	
-	
 	$query = mysqli_query($con, $sqlcheck);
 	$fetch_data = mysqli_fetch_assoc($query);
-	$vreme_obroka = $fetch_data['vreme_obroka'];
+	@$vreme_obroka = $fetch_data['vreme_obroka'];
+
 	
 	if(mysqli_num_rows($query) < 1){
+		
+		
         
 		// insert data
 		$chk="";  
