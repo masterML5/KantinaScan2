@@ -22,7 +22,7 @@ session_start();
 	@$vreme_obroka = $fetch_data['vreme_obroka'];
 
 	
-	if(mysqli_num_rows($query) < 1){
+	if(mysqli_num_rows($query) < 1 || $fetch_data['ime_prezime'] == 'Joker'){
 		
 		
         

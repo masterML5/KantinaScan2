@@ -14,7 +14,7 @@
 </head>
 <body>
   <div class="container-fluid">
-    <h2 class="text-center">Statistika obroka u kantini</h2>
+    <h2 class="text-center">Evidencija obroka u kantini</h2>
     <p class="datatable design text-center">Izvestaji i izmene obroka</p>
     <a href="../index.php" class="btn btn-danger">Povratak nazad</a>
     <div class="row">
@@ -148,6 +148,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="select.js"></script>
+<?php
+$image = '../assets/images/logo.png';
+
+// Read image path, convert to base64 encoding
+$type = pathinfo($image, PATHINFO_EXTENSION);
+$data = file_get_contents($image);
+
+$imgData = base64_encode($data);
+$src = 'data:image/' . $type . ';base64,'.$imgData;
+?>
   <script type="text/javascript">
 
     $(document).ready(function() {
@@ -171,9 +181,12 @@
               extend: 'excel',
               text: 'Izvezi u excel',
               className: 'btn btn-primary',
-                exportOptions:{
-                  columns: [1,2,3,4,5,6]
-                }
+              exportOptions:{
+                stripHtml: false,
+                columns: [1,2,3,4,5,6]
+                },
+                
+                
             },
             {
               extend: 'copy',
@@ -184,11 +197,16 @@
                 }
             },
             {
-              extend: 'pdf',
-              text: 'Izvezi u pdf',
-              className: 'btn btn-primary',
-                exportOptions:{
-                  columns: [1,2,3,4,5,6]
+                extend: 'pdfHtml5',
+                text: 'Izvezi u pdf',
+                className: 'btn btn-primary',
+                title: '',
+                customize: function ( doc ) {
+                    doc.content.splice( 0, 0, {
+                        margin: [ 0, 0, 0, 12 ],
+                        alignment: 'left',
+                        image: '<?php echo $src; ?>'
+                   } );
                 }
             },
 

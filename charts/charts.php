@@ -166,6 +166,11 @@ require '../connection.php';
 									$sql = "SELECT ime_jela, COUNT(id) as Total FROM kantina_statistika WHERE datum = CURDATE() GROUP BY ime_jela";
 									$query = mysqli_query($con, $sql);
 									
+									
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih obroka za danas";
+									}
+									else{
 
 									foreach ($query as $obrok){
 
@@ -174,7 +179,7 @@ require '../connection.php';
 										<?php
 									}
 									
-									
+								}
 
 								?>	
 							</div>
