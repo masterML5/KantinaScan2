@@ -29,7 +29,7 @@ include("sidemenu/sidemenu.html");
         <form action="insert.php" autocomplete="off"  name="forma" method="POST">
          
                 <label class="label2" for="Userinfo">Broj kartice</label>
-                <input type="text" autofocus="autofocus" onkeyup="GetDetail2(this.value); GetDetail4(this.value)" class="form-control" id="CardNumber" name="broj_kartice" placeholder="Broj kartice" onkeypress='return stopenter(event)'>
+                <input type="text"   maxlength="10"  autofocus="autofocus" onkeyup="GetDetail2(this.value); GetDetail4(this.value)" class="form-control" id="CardNumber" name="broj_kartice" placeholder="Broj kartice" onkeypress='return stopenter(event)'>
                 </div>
               <div class="form-group">
               
