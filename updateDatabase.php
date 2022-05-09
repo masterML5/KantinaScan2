@@ -22,8 +22,8 @@ $getResults->execute();
 $results = $getResults->fetchAll(PDO::FETCH_BOTH);
 
 foreach($results as $row){
-    if(empty($row['CardNum']) || $row['CardNum'] == NULL){
-    $card = 77777777777;
+    if(empty($row['CardNum']) || $row['CardNum'] == NULL || $row['CardNum'] == '0'){
+    $card = 77777777;
     }else{
     $card = $row['CardNum'];
     }
@@ -38,11 +38,11 @@ foreach($results as $row){
     $ime_prezime = $row['Name'];
     $slika = "assets/users/".$row['UserPicture'];
     
-
+    
 
     $pdo = Database::connect();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO users (broj_kartice,ime_prezime,image) values (?, ?, ?)";
+    $sql = "INSERT INTO users (broj_kartice,ime_prezime,image) values (?, ?, ?) ON DUPLICATE KEY UPDATE ime_prezime = '$ime_prezime'";
     $q = $pdo->prepare($sql);
     $q->execute(array($broj_kartice,$ime_prezime,$slika));
     Database::disconnect();
