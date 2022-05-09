@@ -1,4 +1,5 @@
 <?php
+session_start();
 require 'connect.php';
 require 'connection.php';
 $sql_host = "10.11.128.204";
@@ -23,7 +24,7 @@ $results = $getResults->fetchAll(PDO::FETCH_BOTH);
 
 foreach($results as $row){
     if(empty($row['CardNum']) || $row['CardNum'] == NULL || $row['CardNum'] == '0'){
-    $card = 77777777;
+        continue;
     }else{
     $card = $row['CardNum'];
     }
@@ -48,3 +49,4 @@ foreach($results as $row){
     Database::disconnect();
     header("Location: index.php");   
 }
+$_SESSION['status'] = '<div class="alert alert-success">' ."Uspešno ste uneli ažurirali bazu podataka!" . '</div';
