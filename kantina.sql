@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS `kantina_statistika` (
   `vreme_obroka` timestamp NOT NULL DEFAULT current_timestamp(),
   `smena` enum('prva','druga','treca') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=174 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=188 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kantina.kantina_statistika: 29 rows
+-- Dumping data for table kantina.kantina_statistika: 35 rows
 /*!40000 ALTER TABLE `kantina_statistika` DISABLE KEYS */;
 REPLACE INTO `kantina_statistika` (`id`, `ime_prezime`, `broj_kartice`, `vrsta_obroka`, `ime_jela`, `vrsta_bona`, `datum`, `vreme_obroka`, `smena`) VALUES
 	(140, 'milos', '123', 'hladni obrok', 'tuna', 'redovan', '2022-04-28', '2022-04-28 21:32:54', 'prva'),
@@ -66,7 +66,13 @@ REPLACE INTO `kantina_statistika` (`id`, `ime_prezime`, `broj_kartice`, `vrsta_o
 	(163, 'aki', '321', 'topli obrok', 'burek', 'redovan', '2022-05-04', '2022-05-04 12:49:15', 'prva'),
 	(164, 'Milos Jelic', '1171743294', 'hladni obrok', 'pasteta', 'redovan', '2022-05-06', '2022-05-06 13:47:29', 'prva'),
 	(165, 'Milan Tosic', '1697418828', 'topli obrok', 'spagete', 'redovan', '2022-05-09', '2022-05-09 09:45:54', 'prva'),
-	(173, 'Milan Tosic', '1697418828', 'hladni obrok', 'sarma', 'redovan', '2022-05-10', '2022-05-10 12:20:26', 'prva');
+	(173, 'Milan Tosic', '1697418828', 'hladni obrok', 'sarma', 'redovan', '2022-05-10', '2022-05-10 12:20:26', 'prva'),
+	(174, 'Robert Mahalik', '76425189', 'hladni obrok', 'slanina', 'redovan', '2022-05-11', '2022-05-10 13:07:59', 'prva'),
+	(182, 'Biljana Sojic', '3326842330', 'hladni obrok', 'burek', 'redovan', '2022-05-11', '2022-05-10 13:27:34', 'prva'),
+	(183, 'Nenad Kolar', '804756590', 'hladni obrok', 'pasulj', 'redovan', '2022-05-11', '2022-05-10 13:28:11', 'prva'),
+	(184, 'Joker', '0804843246', 'hladni obrok', 'pasulj', 'redovan', '2022-05-10', '2022-05-10 13:44:02', 'prva'),
+	(185, 'milos jelic', '1171743294', 'hladni obrok', 'pasulj', 'redovan', '2022-05-26', '2022-05-10 13:45:49', 'prva'),
+	(187, 'Kajica Tomic', '3154669546', 'hladni obrok', 'sarma', 'redovan', '2022-05-18', '2022-05-10 13:51:39', 'prva');
 /*!40000 ALTER TABLE `kantina_statistika` ENABLE KEYS */;
 
 -- Dumping structure for table kantina.obroci
@@ -74,26 +80,27 @@ DROP TABLE IF EXISTS `obroci`;
 CREATE TABLE IF NOT EXISTS `obroci` (
   `id_obroka` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `ime_obroka` varchar(50) NOT NULL DEFAULT '0',
-  `vrsta_obroka` enum('hladni_obrok','topli_obrok') NOT NULL,
+  `vrsta_obroka` enum('hladni obrok','topli obrok') NOT NULL,
   `slika_obroka` varchar(255) NOT NULL DEFAULT 'assets/images/obrok.jpg',
   `aktivan` enum('true','false') NOT NULL DEFAULT 'true',
   `timestamp` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id_obroka`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table kantina.obroci: ~11 rows (approximately)
+-- Dumping data for table kantina.obroci: ~12 rows (approximately)
 REPLACE INTO `obroci` (`id_obroka`, `ime_obroka`, `vrsta_obroka`, `slika_obroka`, `aktivan`, `timestamp`) VALUES
-	(1, 'tuna', 'hladni_obrok', 'assets/images/tuna.jpg', 'true', '2022-04-27 21:34:22'),
-	(2, 'slanina', 'hladni_obrok', 'assets/images/slanina.jpg', 'true', '2022-04-27 21:34:22'),
-	(3, 'sarma', 'topli_obrok', 'assets/images/sarma.jpg', 'true', '2022-04-27 21:34:22'),
-	(4, 'kifla', 'hladni_obrok', 'assets/images/kifla.jpg', 'false', '2022-04-27 21:34:22'),
-	(5, 'pasulj', 'topli_obrok', '', 'true', '2022-04-27 21:39:44'),
-	(6, 'gulas', 'topli_obrok', '', 'true', '2022-04-27 21:40:32'),
-	(7, 'spagete', 'topli_obrok', '', 'true', '2022-04-27 21:42:54'),
-	(10, 'pasteta', 'hladni_obrok', 'assets/images/pasteta.png', 'true', '2022-04-27 21:55:27'),
-	(12, 'burek', 'topli_obrok', 'assets/images/burek.jpg', 'true', '2022-04-27 22:50:13'),
-	(16, 'haringa', 'hladni_obrok', 'assets/images/haringa.png', 'true', '2022-05-03 19:25:20'),
-	(17, 'pohovani sir', 'topli_obrok', 'assets/images/pohovani sir.jpg', 'true', '2022-05-03 19:47:50');
+	(1, 'tuna', 'hladni obrok', 'assets/images/tuna.jpg', 'true', '2022-04-27 21:34:22'),
+	(2, 'slanina', 'topli obrok', 'assets/images/slanina.jpg', 'true', '2022-04-27 21:34:22'),
+	(3, 'sarma', 'topli obrok', 'assets/images/sarma.jpg', 'true', '2022-04-27 21:34:22'),
+	(4, 'kifla', 'hladni obrok', 'assets/images/kifla.jpg', 'false', '2022-04-27 21:34:22'),
+	(5, 'pasulj', 'topli obrok', '', 'true', '2022-04-27 21:39:44'),
+	(6, 'gulas', 'topli obrok', '', 'true', '2022-04-27 21:40:32'),
+	(7, 'spagete', 'topli obrok', '', 'true', '2022-04-27 21:42:54'),
+	(10, 'pasteta', 'hladni obrok', 'assets/images/pasteta.png', 'true', '2022-04-27 21:55:27'),
+	(12, 'burek', 'topli obrok', 'assets/images/burek.jpg', 'true', '2022-04-27 22:50:13'),
+	(16, 'haringa', 'hladni obrok', 'assets/images/haringa.png', 'true', '2022-05-03 19:25:20'),
+	(17, 'pohovani sir', 'topli obrok', 'assets/images/pohovani sir.jpg', 'true', '2022-05-03 19:47:50'),
+	(18, 'saran', 'topli obrok', 'assets/images/saran.jpg', 'true', '2022-05-10 15:36:45');
 
 -- Dumping structure for table kantina.users
 DROP TABLE IF EXISTS `users`;
@@ -105,9 +112,9 @@ CREATE TABLE IF NOT EXISTS `users` (
   `image` text DEFAULT 'assets/images/profile.png',
   PRIMARY KEY (`id`),
   UNIQUE KEY `broj_kartice` (`broj_kartice`) USING HASH
-) ENGINE=MyISAM AUTO_INCREMENT=435 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=436 DEFAULT CHARSET=latin1;
 
--- Dumping data for table kantina.users: 0 rows
+-- Dumping data for table kantina.users: 435 rows
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 REPLACE INTO `users` (`id`, `ime_prezime`, `broj_kartice`, `JMBG`, `image`) VALUES
 	(1, 'Zdravko Jevic', '1169760110', '2901958820067', 'assets/users/Photo1.jpg'),
@@ -543,7 +550,8 @@ REPLACE INTO `users` (`id`, `ime_prezime`, `broj_kartice`, `JMBG`, `image`) VALU
 	(431, 'Bela Kadar', '688683822', '1509964820094', 'assets/users/Photo96.jpg'),
 	(432, 'Damir Lesic', '2687745508', '2104988830027', 'assets/users/Photo97.jpg'),
 	(433, 'Nada Bundalo', '2055940890', '1609991835022', 'assets/users/Photo98.jpg'),
-	(434, 'Barakovic Suzana', '780160724', '1903976825075', 'assets/users/Photo99.jpg');
+	(434, 'Barakovic Suzana', '780160724', '1903976825075', 'assets/users/Photo99.jpg'),
+	(435, 'Joker', '0804843246', '1111111111111', 'assets/images/joker.jpg');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 
 -- Dumping structure for table kantina.vrsta_jela
@@ -555,9 +563,9 @@ CREATE TABLE IF NOT EXISTS `vrsta_jela` (
   `datum` date NOT NULL,
   `slika` varchar(255) DEFAULT 'assets/images/obrok.jpg',
   PRIMARY KEY (`id_vrsta_jela`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table kantina.vrsta_jela: ~34 rows (approximately)
+-- Dumping data for table kantina.vrsta_jela: ~40 rows (approximately)
 REPLACE INTO `vrsta_jela` (`id_vrsta_jela`, `ime_jela`, `tip_jela`, `datum`, `slika`) VALUES
 	(1, 'sarma', 'topli', '2022-04-26', 'assets/images/sarma.jpg'),
 	(2, 'tuna', 'hladan', '2022-04-26', 'assets/images/tuna.jpg'),
@@ -597,7 +605,8 @@ REPLACE INTO `vrsta_jela` (`id_vrsta_jela`, `ime_jela`, `tip_jela`, `datum`, `sl
 	(111, 'slanina', 'hladan', '2022-05-09', 'assets/images/slanina.jpg'),
 	(112, 'spagete', 'topli', '2022-05-09', ''),
 	(113, 'slanina', 'hladan', '2022-05-10', 'assets/images/slanina.jpg'),
-	(114, 'spagete', 'topli', '2022-05-10', '');
+	(114, 'spagete', 'topli', '2022-05-10', ''),
+	(115, 'saran', 'topli', '2022-05-10', 'assets/images/saran.jpg');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
