@@ -333,9 +333,13 @@ load(); //if you don't want the click
             mytable.draw();
             $('#addUserModal').modal('hide');
           }
-          else
+          else if (status=='false')
           {
             alert('failed');
+          }
+          else if (status=='already_recorded')
+          {
+            alert('Korisnik je već evidentiran u predhodnih 12h! Podaci nisu poslati!')
           }
         }
       });

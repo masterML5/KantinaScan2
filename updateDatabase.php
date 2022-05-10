@@ -49,4 +49,4 @@ foreach($results as $row){
     Database::disconnect();
     header("Location: index.php");   
 }
-$_SESSION['status'] = '<div class="alert alert-success">' ."Uspešno ste uneli ažurirali bazu podataka!" . '</div';
+$_SESSION['status'] = '<div class="alert alert-success">' ."Uspešno ste ažurirali bazu podataka!" . '</div';
