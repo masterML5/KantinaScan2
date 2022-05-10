@@ -37,8 +37,8 @@ include('sidemenu_novi_obrok.html');
                       <label for="">Vrsta obroka</label>
                       <select name="vrsta_obroka" id="vrsta_obroka" required>
                       <option value="" selected disabled hidden>Izaberi</option>
-                      <option value="hladni_obrok" for="vrsta_obroka" >Hladan obrok</option>
-                      <option value="topli_obrok" for="vrsta_obroka" >Topli obrok</option>
+                      <option value="hladni obrok" for="vrsta_obroka" >Hladan obrok</option>
+                      <option value="topli obrok" for="vrsta_obroka" >Topli obrok</option>
                       </select>
                     </div>
                    

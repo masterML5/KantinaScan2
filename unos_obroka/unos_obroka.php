@@ -39,7 +39,7 @@ include("sidemenu_unos.html");
                                 
                                 <?php
                                 require('../connection.php');
-                                $query = "SELECT * FROM obroci WHERE vrsta_obroka ='hladni_obrok' && aktivan = true";
+                                $query = "SELECT * FROM obroci WHERE vrsta_obroka ='hladni obrok' && aktivan = true";
                                 $query_run = mysqli_query($con, $query);
                                 if(mysqli_num_rows($query_run) > 0)
                                 {
@@ -63,7 +63,7 @@ include("sidemenu_unos.html");
                                 
                                 <?php
                                 require('../connection.php');
-                                $query = "SELECT * FROM obroci WHERE vrsta_obroka ='topli_obrok'";
+                                $query = "SELECT * FROM obroci WHERE vrsta_obroka ='topli obrok' && aktivan = true";
                                 $query_run = mysqli_query($con, $query);
                                 if(mysqli_num_rows($query_run) > 0)
                                 {

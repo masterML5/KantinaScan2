@@ -340,13 +340,17 @@ load(); //if you don't want the click
           }
           else if (status=='already_recorded')
           {
-            alert('Korisnik je već evidentiran u predhodnih 12h! Podaci nisu poslati!')
+            alert('Korisnik je već evidentiran u predhodnih 12h! Podaci nisu poslati!');
+          }
+          else if (status=='wrong_choice')
+          {
+            alert('Pogresan izbor vrste obroka za izabrano jelo!');
           }
         }
       });
      }
      else {
-      alert('Fill all the required fields');
+      alert('Popunite sva polja!');
     }
   });
     $(document).on('submit','#updateUser',function(e){
