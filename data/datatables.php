@@ -148,6 +148,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="select.js"></script>
+<script src="../js/stopenter.js"></script>
 <?php
 $image = '../assets/images/logo.png';
 
@@ -562,13 +563,13 @@ load(); //if you don't want the click
           <div class="mb-3 row">
             <label for="addUserField" class="col-md-3 form-label">Ime Prezime</label>
             <div class="col-md-9">
-              <input type="text" class="form-control"  onkeyup="GetDetail(this.value)" id="addUserField" name="name" >
+              <input type="text" class="form-control"  onkeyup="GetDetail(this.value)" id="addUserField" name="name" onkeypress='return stopenter(event)'>
             </div>
           </div>
           <div class="mb-3 row">
             <label for="addCardField" class="col-md-3 form-label">Broj kartice</label>
             <div class="col-md-9">
-              <input type="number" class="form-control"  onkeyup="GetDetail2(this.value)" id="addCardField" name="email">
+              <input type="number" class="form-control"  onkeyup="GetDetail2(this.value)" id="addCardField" name="email" onkeypress='return stopenter(event)'>
             </div>
           </div>
           <div class="mb-3 row">
@@ -581,7 +582,7 @@ load(); //if you don't want the click
             <label for="addMealField" class="col-md-3 form-label">Vrsta obroka</label>
             <div class="col-md-9">
             <select name="vrsta_obroka" id="addMealField">
-              <option value="hladan obrok" name="hladni obrok">Hladan obrok</option>
+              <option value="hladni obrok" name="hladni obrok">Hladan obrok</option>
               <option value="topli obrok" name="topli obrok">Topli obrok</option>
                 </select>
             </div>

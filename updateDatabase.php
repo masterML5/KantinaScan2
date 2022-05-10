@@ -38,14 +38,15 @@ foreach($results as $row){
     
     $ime_prezime = $row['Name'];
     $slika = "assets/users/".$row['UserPicture'];
+    $jmbg = $row['Duty'];
     
     
 
     $pdo = Database::connect();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO users (broj_kartice,ime_prezime,image) values (?, ?, ?) ON DUPLICATE KEY UPDATE ime_prezime = '$ime_prezime'";
+    $sql = "INSERT INTO users (broj_kartice,ime_prezime,JMBG,image) values (?, ?, ?, ?) ON DUPLICATE KEY UPDATE ime_prezime = '$ime_prezime', JMBG = '$jmbg'";
     $q = $pdo->prepare($sql);
-    $q->execute(array($broj_kartice,$ime_prezime,$slika));
+    $q->execute(array($broj_kartice,$ime_prezime,$jmbg,$slika));
     Database::disconnect();
     header("Location: index.php");   
 }
