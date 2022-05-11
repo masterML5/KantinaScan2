@@ -1,5 +1,6 @@
 .card-header{
     text-align: center;
+    
 }
 
 span{
@@ -9,3 +10,7 @@ span{
 p::first-letter {
     text-transform: uppercase;
 }
+.datumsmenalabel{
+    padding-left: 5px;
+}
+

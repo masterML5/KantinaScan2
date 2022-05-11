@@ -26,7 +26,7 @@ require '../connection.php';
 			<div class="row">
 				<div class="col-md-4">
 					<div class="card mt-4">
-						<div class="card-header">Današnji dan</div>
+						<div class="card-header bg-warning">Današnji dan</div>
 						<div class="card-body">
 							<div class="chart-container pie-chart">
 								<canvas id="pie_chart"></canvas>
@@ -36,7 +36,7 @@ require '../connection.php';
 				</div>
 				<div class="col-md-4">
 					<div class="card mt-4">
-						<div class="card-header">Trenutna nedelja</div>
+						<div class="card-header bg-warning">Trenutna nedelja</div>
 						<div class="card-body">
 							<div class="chart-container pie-chart">
 								<canvas id="doughnut_chart"></canvas>
@@ -46,7 +46,7 @@ require '../connection.php';
 				</div>
 				<div class="col-md-4">
 					<div class="card mt-4 mb-4">
-						<div class="card-header">Trenutni mesec</div>
+						<div class="card-header bg-warning">Trenutni mesec</div>
 						<div class="card-body">
 							<div class="chart-container pie-chart">
 								<canvas id="bar_chart"></canvas>
@@ -54,9 +54,9 @@ require '../connection.php';
 						</div>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<div class="card mt-4 mb-4">
-						<div class="card-header">Izdato obroka danas po vrsti obroka</div>
+						<div class="card-header bg-warning">Izdato obroka danas po vrsti obroka</div>
 						<div class="card-body">
 							<p>
 								Hladni obroci :
@@ -96,9 +96,9 @@ require '../connection.php';
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 					<div class="card mt-4 mb-4">
-						<div class="card-header">Izdato obroka danas po bonu</div>
+						<div class="card-header bg-warning">Izdato obroka danas po bonu</div>
 						<div class="card-body">
 						<p>
 								Redovan bon :
@@ -157,9 +157,9 @@ require '../connection.php';
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 					<div class="card mt-4 mb-4">
-						<div class="card-header">Izdato obroka danas po jelu</div>
+						<div class="card-header bg-warning">Izdato obroka danas po jelu</div>
 						<div class="card-body">
 						<?php 
 									
@@ -186,9 +186,150 @@ require '../connection.php';
 						</div>
 					</div>
 				
-				<!-- <div class="col-md-4">
+				    <div class="col-md-3">
 					<div class="card mt-4 mb-4">
-						<div class="card-header">Godina</div>
+						<div class="card-header bg-warning">Izdato po smenama danas</div>
+						<div class="card-body">
+						<?php 
+									
+									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 6 AND 14 AND datum = CURDATE()";
+									$query = mysqli_query($con, $sql);
+									
+									
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih obroka za danas";
+									}
+									else{
+
+									foreach ($query as $smena){
+
+										?>
+										<p> Prva smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 14 AND 22 AND datum = CURDATE()";
+									$query = mysqli_query($con, $sql);
+									
+									
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih obroka za danas";
+									}
+									else{
+
+									foreach ($query as $smena){
+
+										?>
+										<p> Druga smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 22 AND 6 AND datum = CURDATE()";
+									$query = mysqli_query($con, $sql);
+									
+									
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih obroka za danas";
+									}
+									else{
+
+									foreach ($query as $smena){
+
+										?>
+										<p> Treća smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+
+								?>	
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+					<div class="card mt-4 mb-4">
+						<div class="card-header bg-warning bg-warning">Izdato po smenama za određeni datum</div>
+						<div class="card-body">
+						<div class="datumsmenalabel">
+						<form action="" method="post">
+						<label for="">Izaberite datum za izveštaj : </label>
+						<input type="date" name="datumsmena" id="datumsmena">
+						<button type="submit" name="SubmitButton" class="btn btn-primary">Filtriraj</button>
+						</form>
+						</div>
+						<?php 		
+									$datumsmena = '';
+									if(isset($_POST['SubmitButton'])){
+									$datumsmena = $_POST['datumsmena'];								
+									
+									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 6 AND 14 AND datum = '$datumsmena'";
+									$query = mysqli_query($con, $sql);
+									?> <label>Filtrirano za datum : <?php echo $datumsmena ?></label><?php	
+									}					
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih obroka za danas";
+									}
+									else{
+
+									foreach ($query as $smena){
+
+										?>
+										<p> Prva smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 14 AND 22 AND datum = '$datumsmena'";
+									$query = mysqli_query($con, $sql);
+									
+									
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih obroka za danas";
+									}
+									else{
+
+									foreach ($query as $smena){
+
+										?>
+										<p> Druga smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 22 AND 6 AND datum = '$datumsmena'";
+									$query = mysqli_query($con, $sql);
+									
+									
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih obroka za danas";
+									}
+									else{
+
+									foreach ($query as $smena){
+
+										?>
+										<p> Treća smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+
+								?>	
+								
+							</div>
+						</div>
+					</div>
+				<!-- <div class="col-md-3">
+					<div class="card mt-4 mb-4">
+						<div class="card-header bg-warning">Godina</div>
 						<div class="card-body">
 							<div class="chart-container pie-chart">
 								<canvas id="bar_chart2"></canvas>
