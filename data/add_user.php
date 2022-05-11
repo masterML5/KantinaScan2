@@ -6,6 +6,7 @@ $datum = $_POST['datum'];
 $vrsta_obroka = $_POST['vrsta_obroka']; 
 $vrsta_bona = $_POST['vrsta_bona'];
 $ime_jela = $_POST['ime_jela'];
+
 $a = "";
 foreach($ime_jela as $jelo){
     $a = $jelo;
@@ -14,7 +15,7 @@ $sqlobrok = "SELECT * FROM obroci WHERE ime_obroka like '$jelo' AND vrsta_obroka
 $queryobrok = mysqli_query($con, $sqlobrok);
 
 
-if(mysqli_num_rows($queryobrok) < 1){
+if(mysqli_num_rows($queryobrok) > 0){
     
 $chk1 = "";
 $sqlcheck = "SELECT * FROM kantina_statistika WHERE ime_prezime like '$ime_prezime' AND broj_kartice like $broj_kartice AND CURRENT_TIMESTAMP < vreme_obroka + INTERVAL 12 HOUR";
