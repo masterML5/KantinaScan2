@@ -256,7 +256,7 @@ require '../connection.php';
 						<div class="card-header bg-warning bg-warning">Izdato po smenama za određeni datum</div>
 						<div class="card-body">
 						<div class="datumsmenalabel">
-						<form action="" method="post">
+						<form action="smena.php" method="post">
 						<label for="">Izaberite datum za izveštaj : </label>
 						<input type="date" name="datumsmena" id="datumsmena">
 						<button type="submit" name="SubmitButton" class="btn btn-primary">Filtriraj</button>

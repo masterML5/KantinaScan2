@@ -25,10 +25,15 @@ $results = $getResults->fetchAll(PDO::FETCH_BOTH);
 foreach($results as $row){
     if(empty($row['CardNum']) || $row['CardNum'] == NULL || $row['CardNum'] == '0'){
         continue;
-    }else{
+    }
+    else{
     $card = $row['CardNum'];
     }
-    $dechex1 = dechex($card);
+    if(strlen($card) == 9){
+        $card = sprintf("%010d", $card);
+    }
+    
+    $dechex1 = str_pad(dechex($card), 8, "0", STR_PAD_LEFT);
     $dechex = strval($dechex1);
     $originalString = $dechex;
     $arrayWith2CharsPerElement = str_split($originalString, 2);
@@ -44,7 +49,7 @@ foreach($results as $row){
 
     $pdo = Database::connect();
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO users (broj_kartice,ime_prezime,JMBG,image) values (?, ?, ?, ?) ON DUPLICATE KEY UPDATE ime_prezime = '$ime_prezime', JMBG = '$jmbg'";
+    $sql = "INSERT INTO users (broj_kartice,ime_prezime,JMBG,image) values (?, ?, ?, ?) ON DUPLICATE KEY UPDATE ime_prezime = '$ime_prezime', JMBG = '$jmbg', broj_kartice = '$broj_kartice'";
     $q = $pdo->prepare($sql);
     $q->execute(array($broj_kartice,$ime_prezime,$jmbg,$slika));
     Database::disconnect();
