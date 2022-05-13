@@ -353,6 +353,31 @@ load(); //if you don't want the click
       alert('Popunite sva polja!');
     }
   });
+  $('#example').on('click','.editbtn ',function(event){
+      var table = $('#example').DataTable();
+      var trid = $(this).closest('tr').attr('id');
+     // console.log(selectedRow);
+     var id = $(this).data('id');
+     $('#exampleModal').modal('show');
+
+     $.ajax({
+      url:"get_single_data.php",
+      data:{id:id},
+      type:'post',
+      success:function(data)
+      {
+       var json = JSON.parse(data);
+       $('#nameField').val(json.ime_prezime);
+       $('#cardField').val(json.broj_kartice);
+       $('#dateField').val(json.datum);
+       $('#mealField').val(json.vrsta_obroka);
+       $('#typeField').val(json.vrsta_bona);
+       $('#obrokField').val(json.ime_jela);
+       $('#id').val(id);
+       $('#trid').val(trid);
+     }
+   })
+   });
     $(document).on('submit','#updateUser',function(e){
       e.preventDefault();
        //var tr = $(this).closest('tr');
@@ -399,31 +424,7 @@ load(); //if you don't want the click
         alert('Fill all the required fields');
       }
     });
-    $('#example').on('click','.editbtn ',function(event){
-      var table = $('#example').DataTable();
-      var trid = $(this).closest('tr').attr('id');
-     // console.log(selectedRow);
-     var id = $(this).data('id');
-     $('#exampleModal').modal('show');
-
-     $.ajax({
-      url:"get_single_data.php",
-      data:{id:id},
-      type:'post',
-      success:function(data)
-      {
-       var json = JSON.parse(data);
-       $('#nameField').val(json.ime_prezime);
-       $('#cardField').val(json.broj_kartice);
-       $('#dateField').val(json.datum);
-       $('#mealField').val(json.vrsta_obroka);
-       $('#typeField').val(json.vrsta_bona);
-       $('#obrokField').val(json.ime_jela);
-       $('#id').val(id);
-       $('#trid').val(trid);
-     }
-   })
-   });
+  
 
     $(document).on('click','.deleteBtn',function(event){
        var table = $('#example').DataTable();
@@ -479,19 +480,19 @@ load(); //if you don't want the click
           <div class="mb-3 row">
             <label for="nameField"   class="col-md-3 form-label">Ime Prezime</label>
             <div class="col-md-9">
-              <input type="text" onkeyup="GetDetail3(this.value)" class="form-control" id="nameField" name="name" >
+              <input type="text" onkeyup="GetDetail3(this.value)" class="form-control" id="nameField" name="ime_prezime" >
             </div>
           </div>
           <div class="mb-3 row">
             <label for="cardField" class="col-md-3 form-label">Broj kartice</label>
             <div class="col-md-9">
-              <input type="number"  onkeyup="GetDetail4(this.value)" class="form-control" id="cardField" name="email">
+              <input type="number"  onkeyup="GetDetail4(this.value)" class="form-control" id="cardField" name="broj_kartice">
             </div>
           </div>
           <div class="mb-3 row">
             <label for="dateField" class="col-md-3 form-label">Datum</label>
             <div class="col-md-9">
-              <input type="date" class="form-control" id="dateField" name="mobile">
+              <input type="date" class="form-control" id="dateField" name="datum">
             </div>
           </div>
           <div class="mb-3 row">
@@ -544,7 +545,7 @@ load(); //if you don't want the click
             </div>
           </div>
           <div class="text-center">
-            <button type="submit" class="btn btn-primary">Izmeni</button>
+            <button type="submit"  class="btn btn-primary">Izmeni</button>
           </div>
         </form> 
       </div>

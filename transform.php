@@ -2,7 +2,7 @@
 
 
 
-$card = 1682796202;
+$card = 240285924;
 $num_length = strlen((string)$card);
 echo $num_length . '<br>';
 if($num_length == 9){
