@@ -185,7 +185,7 @@ require '../connection.php';
 							</div>
 						</div>
 					</div>
-				
+								
 				    <div class="col-md-3">
 					<div class="card mt-4 mb-4">
 						<div class="card-header bg-warning">Izdato po smenama danas</div>
@@ -194,15 +194,16 @@ require '../connection.php';
 									
 									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 6 AND 14 AND datum = CURDATE()";
-									$query = mysqli_query($con, $sql);
+									$query_smena = mysqli_query($con, $sql);
+									$fetch_smena = mysqli_fetch_assoc($query_smena);
+
 									
-									
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih obroka za danas";
+									if(mysqli_num_rows($query_smena) < 1 || $fetch_smena['Total'] == '0'){
+										echo "Nema izdatih obroka za prvu smenu danas <br>";
 									}
 									else{
 
-									foreach ($query as $smena){
+									foreach ($query_smena as $smena){
 
 										?>
 										<p> Prva smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
@@ -212,15 +213,15 @@ require '../connection.php';
 									}
 									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 14 AND 22 AND datum = CURDATE()";
-									$query = mysqli_query($con, $sql);
+									$query_smena2 = mysqli_query($con, $sql);
+									$fetch_smena2 = mysqli_fetch_assoc($query_smena2);
 									
-									
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih obroka za danas";
+									if(mysqli_num_rows($query_smena2) < 1 || $fetch_smena2['Total'] == '0'){
+										echo "Nema izdatih obroka za drugu smenu danas <br>";
 									}
 									else{
 
-									foreach ($query as $smena){
+									foreach ($query_smena2 as $smena){
 
 										?>
 										<p> Druga smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
@@ -230,15 +231,15 @@ require '../connection.php';
 									}
 									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 22 AND 6 AND datum = CURDATE()";
-									$query = mysqli_query($con, $sql);
-									
-									
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih obroka za danas";
+									$query_smena3 = mysqli_query($con, $sql);
+									$fetch_smena3 = mysqli_fetch_assoc($query_smena3);
+								
+									if(mysqli_num_rows($query_smena3) < 1 || $fetch_smena3['Total'] == '0'){
+										echo "Nema izdatih obroka za treću smenu danas";
 									}
 									else{
-
-									foreach ($query as $smena){
+										
+									foreach ($query_smena3 as $smena){
 
 										?>
 										<p> Treća smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
@@ -268,18 +269,19 @@ require '../connection.php';
 									
 									if(isset($_POST['SubmitVrstaObroka'])){
 									$datumVrstaObroka = $_POST['datumvrstaobroka'];								
-								
+									
 									$sqlvrstaObrokaHladni = "SELECT vrsta_obroka AS 'vrstaObroka',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE vrsta_obroka = 'hladni obrok' AND datum = '$datumVrstaObroka'";
-									$queryvrstaObroka = mysqli_query($con, $sqlvrstaObrokaHladni);
-									?> <label id="filterdatum">Filtrirano za datum : <span class="pdatumVrstaObroka"> <?php echo $datumVrstaObroka ?> </span></label><?php	
-									}					
-									if(empty($queryvrstaObroka) || mysqli_num_rows($queryvrstaObroka) < 1){
-										echo "Nema izdatih bonova za izabrani datum";
+									$query_vrstah = mysqli_query($con, $sqlvrstaObrokaHladni);
+									$fetch_vrstah = mysqli_fetch_assoc($query_vrstah);
+									?> <label id="filterdatum">Filtrirano za datum : <span id="pdatumVrstaObroka"> <?php echo $datumVrstaObroka ?> </span></label><br><?php	
+												
+									if(mysqli_num_rows($query_vrstah) < 1 || $fetch_vrstah['Total'] == '0'){
+										echo "Nema izdatih obroka za izabrani datum <br>";
 									}
 									else{
 
-									foreach ($queryvrstaObroka as $vrstaObroka){
+									foreach ($query_vrstah as $vrstaObroka){
 
 										?>
 										<p> Hladan obroci : <span class="pformVrstaObroka"> <?= $vrstaObroka['Total'];?></span> izdatih jela </p>
@@ -289,21 +291,24 @@ require '../connection.php';
 									}
 									$sqlvrstaObrokaTopli = "SELECT vrsta_obroka AS 'vrstaObroka',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE vrsta_obroka = 'topli obrok' AND datum = '$datumVrstaObroka'";
-									$queryvrstaObroka = mysqli_query($con, $sqlvrstaObrokaTopli);
+									$query_vrstat = mysqli_query($con, $sqlvrstaObrokaTopli);
+									$fetch_vrstat = mysqli_fetch_assoc($query_vrstat);
 									
-									
-									if(empty($queryvrstaObroka) || mysqli_num_rows($queryvrstaObroka) < 1 ){
-										echo "Nema izdatih bonova za izabrani datum";
+									if( $fetch_vrstah['Total'] == '0' || mysqli_num_rows($query_vrstat) < 1 ){
+										echo "Nema izdatih obroka za izabrani datum";
 									}
 									else{
 
-									foreach ($queryvrstaObroka as $vrstaObroka){
+									foreach ($query_vrstat as $vrstaObroka){
 
 										?>
 										<p> Topli obroci : <span class="pformVrstaObroka"> <?= $vrstaObroka['Total'];?></span> izdatih jela </p>
 										<?php
 									}
 									
+								}
+									}else{
+										echo '<div class="poruka">Niste izabrali datum</div>';
 									}
 									
 								?>	
@@ -330,33 +335,36 @@ require '../connection.php';
 								
 									$sql = "SELECT vrsta_bona AS 'Bonovi',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE vrsta_bona = 'redovan' AND datum = '$datumbon'";
-									$query = mysqli_query($con, $sql);
-									?> <label id="filterdatum">Filtrirano za datum : <span class="pdatumbon"> <?php echo $datumbon ?> </span></label><?php	
-									}					
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih bonova za izabrani datum";
+									$query_bonr = mysqli_query($con, $sql);
+									$fetch_bonr = mysqli_fetch_assoc($query_bonr);
+									?>
+					
+									 <label id="filterdatum">Filtrirano za datum : <span class="pdatumbon"> <?php echo $datumbon ?> </span></label><br><?php	
+														
+									if(mysqli_num_rows($query_bonr) < 1 || $fetch_bonr['Total'] == '0'){
+										echo "<p>Nema izdatih <span> redovnih </span> bonova za izabrani datum <p>";
 									}
 									else{
 
-									foreach ($query as $bon){
+									foreach ($query_bonr as $bon){
 
 										?>
-										<p> Redovan bon : <span class="pformbon"> <?= $bon['Total'];?></span> izdatih jela </p>
+										<p> Redovan bon : <span id="pformbon"> <?= $bon['Total'];?></span> izdatih jela </p>
 										<?php
 									}
 									
 									}
 									$sql = "SELECT vrsta_bona AS 'Bonovi',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE vrsta_bona = 'gosti' AND datum = '$datumbon'";
-									$query = mysqli_query($con, $sql);
+									$query_bong = mysqli_query($con, $sql);
+									$fetch_bong = mysqli_fetch_assoc($query_bong);
 									
-									
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih bonova za izabrani datum";
+									if(mysqli_num_rows($query_bong) < 1  || $fetch_bong['Total'] == '0'){
+										echo "<p>Nema izdatih <span> gosti </span>bonova za izabrani datum </p>";
 									}
 									else{
 
-									foreach ($query as $bon){
+									foreach ($query_bong as $bon){
 
 										?>
 										<p> Gosti bon : <span class="pformbon"> <?= $bon['Total'];?></span> izdatih jela </p>
@@ -366,15 +374,15 @@ require '../connection.php';
 									}
 									$sql = "SELECT vrsta_bona AS 'Bonovi',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE vrsta_bona = 'faktura' AND datum = '$datumbon'";
-									$query = mysqli_query($con, $sql);
+									$query_bonf = mysqli_query($con, $sql);
+									$fetch_bonf = mysqli_fetch_assoc($query_bonf);
 									
-									
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih bonova za izabrani datum";
+									if(mysqli_num_rows($query_bonf) < 1 || $fetch_bonf['Total'] == '0'){
+										echo "<p>Nema izdatih <span> faktura </span> bonova za izabrani datum</p>";
 									}
 									else{
 
-									foreach ($query as $bon){
+									foreach ($query_bonf as $bon){
 
 										?>
 										<p> Faktura bon : <span class="pformbon"> <?= $bon['Total'];?></span> izdatih jela </p>
@@ -382,6 +390,9 @@ require '../connection.php';
 									}
 									
 									}
+								}else{
+									echo '<div class="poruka">Niste izabrali datum</div>';
+								}
 								?>	
 								
 							</div>
@@ -395,20 +406,20 @@ require '../connection.php';
 						<form action="" method="post" id="formasmena">
 						<label for="">Izaberite datum za izveštaj : </label>
 						<input type="date" name="datumsmena" id="datumsmena">
-						<button type="submit" name="SubmitButton" class="btn btn-primary">Filtriraj</button>
+						<button type="submit" name="SubmitSmena" class="btn btn-primary">Filtriraj</button>
 						<button type="reset" id="resetbtn" name="resetbtn" onClick="resetform();" class="btn btn-danger">Poništi</button>
 						</form>
 						</div>
 						<?php 		
 									$datumsmena = '';
-									if(isset($_POST['SubmitButton'])){
+									if(isset($_POST['SubmitSmena'])){
 									$datumsmena = $_POST['datumsmena'];								
 									
 									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 6 AND 14 AND datum = '$datumsmena'";
 									$query = mysqli_query($con, $sql);
 									?> <label id="filterdatum">Filtrirano za datum : <span class="pdatum"> <?php echo $datumsmena ?> </span></label><?php	
-									}					
+													
 									if(mysqli_num_rows($query) < 1){
 										echo "Nema izdatih obroka za danas";
 									}
@@ -458,7 +469,10 @@ require '../connection.php';
 									}
 									
 									}
-
+								}else{
+									echo '<div class="poruka">Niste izabrali datum<div>';
+								}
+							
 								?>	
 								
 							</div>
