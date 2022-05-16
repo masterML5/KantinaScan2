@@ -253,13 +253,150 @@ require '../connection.php';
 					</div>
 					<div class="col-md-4">
 					<div class="card mt-4 mb-4">
+						<div class="card-header bg-warning bg-warning">Izdato po vrsti obroka za određeni datum</div>
+						<div class="card-body">
+						<div class="datumsmenalabel">
+						<form action="" method="post" id="formavrstaobroka">
+						<label for="">Izaberite datum za izveštaj : </label>
+						<input type="date" name="datumvrstaobroka" id="datumvrstaobroka">
+						<button type="submit" name="SubmitVrstaObroka" class="btn btn-primary">Filtriraj</button>
+						<button type="reset" id="resetbtnVrstaObroka" name="resetbtnVrstaObroka" onClick="resetformVrstaObroka();" class="btn btn-danger">Poništi</button>
+						</form>
+						</div>
+						<?php 		
+									$datumVrstaObroka = '';
+									
+									if(isset($_POST['SubmitVrstaObroka'])){
+									$datumVrstaObroka = $_POST['datumvrstaobroka'];								
+								
+									$sqlvrstaObrokaHladni = "SELECT vrsta_obroka AS 'vrstaObroka',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE vrsta_obroka = 'hladni obrok' AND datum = '$datumVrstaObroka'";
+									$queryvrstaObroka = mysqli_query($con, $sqlvrstaObrokaHladni);
+									?> <label id="filterdatum">Filtrirano za datum : <span class="pdatumVrstaObroka"> <?php echo $datumVrstaObroka ?> </span></label><?php	
+									}					
+									if(empty($queryvrstaObroka) || mysqli_num_rows($queryvrstaObroka) < 1){
+										echo "Nema izdatih bonova za izabrani datum";
+									}
+									else{
+
+									foreach ($queryvrstaObroka as $vrstaObroka){
+
+										?>
+										<p> Hladan obroci : <span class="pformVrstaObroka"> <?= $vrstaObroka['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+									$sqlvrstaObrokaTopli = "SELECT vrsta_obroka AS 'vrstaObroka',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE vrsta_obroka = 'topli obrok' AND datum = '$datumVrstaObroka'";
+									$queryvrstaObroka = mysqli_query($con, $sqlvrstaObrokaTopli);
+									
+									
+									if(empty($queryvrstaObroka) || mysqli_num_rows($queryvrstaObroka) < 1 ){
+										echo "Nema izdatih bonova za izabrani datum";
+									}
+									else{
+
+									foreach ($queryvrstaObroka as $vrstaObroka){
+
+										?>
+										<p> Topli obroci : <span class="pformVrstaObroka"> <?= $vrstaObroka['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+									
+								?>	
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+					<div class="card mt-4 mb-4">
+						<div class="card-header bg-warning bg-warning">Izdato po bonovima za određeni datum</div>
+						<div class="card-body">
+						<div class="datumsmenalabel">
+						<form action="" method="post" id="formabon">
+						<label for="">Izaberite datum za izveštaj : </label>
+						<input type="date" name="datumbon" id="datumbon">
+						<button type="submit" name="SubmitBon" class="btn btn-primary">Filtriraj</button>
+						<button type="reset" id="resetbtnbon" name="resetbtnbon" onClick="resetformbon();" class="btn btn-danger">Poništi</button>
+						</form>
+						</div>
+						<?php 		
+									$datumbon = '';
+									if(isset($_POST['SubmitBon'])){
+									$datumbon = $_POST['datumbon'];								
+								
+									$sql = "SELECT vrsta_bona AS 'Bonovi',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE vrsta_bona = 'redovan' AND datum = '$datumbon'";
+									$query = mysqli_query($con, $sql);
+									?> <label id="filterdatum">Filtrirano za datum : <span class="pdatumbon"> <?php echo $datumbon ?> </span></label><?php	
+									}					
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih bonova za izabrani datum";
+									}
+									else{
+
+									foreach ($query as $bon){
+
+										?>
+										<p> Redovan bon : <span class="pformbon"> <?= $bon['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+									$sql = "SELECT vrsta_bona AS 'Bonovi',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE vrsta_bona = 'gosti' AND datum = '$datumbon'";
+									$query = mysqli_query($con, $sql);
+									
+									
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih bonova za izabrani datum";
+									}
+									else{
+
+									foreach ($query as $bon){
+
+										?>
+										<p> Gosti bon : <span class="pformbon"> <?= $bon['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+									$sql = "SELECT vrsta_bona AS 'Bonovi',COUNT(id) AS Total
+									FROM `kantina_statistika` WHERE vrsta_bona = 'faktura' AND datum = '$datumbon'";
+									$query = mysqli_query($con, $sql);
+									
+									
+									if(mysqli_num_rows($query) < 1){
+										echo "Nema izdatih bonova za izabrani datum";
+									}
+									else{
+
+									foreach ($query as $bon){
+
+										?>
+										<p> Faktura bon : <span class="pformbon"> <?= $bon['Total'];?></span> izdatih jela </p>
+										<?php
+									}
+									
+									}
+								?>	
+								
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+					<div class="card mt-4 mb-4">
 						<div class="card-header bg-warning bg-warning">Izdato po smenama za određeni datum</div>
 						<div class="card-body">
 						<div class="datumsmenalabel">
-						<form action="smena.php" method="post">
+						<form action="" method="post" id="formasmena">
 						<label for="">Izaberite datum za izveštaj : </label>
 						<input type="date" name="datumsmena" id="datumsmena">
 						<button type="submit" name="SubmitButton" class="btn btn-primary">Filtriraj</button>
+						<button type="reset" id="resetbtn" name="resetbtn" onClick="resetform();" class="btn btn-danger">Poništi</button>
 						</form>
 						</div>
 						<?php 		
@@ -270,7 +407,7 @@ require '../connection.php';
 									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 6 AND 14 AND datum = '$datumsmena'";
 									$query = mysqli_query($con, $sql);
-									?> <label>Filtrirano za datum : <?php echo $datumsmena ?></label><?php	
+									?> <label id="filterdatum">Filtrirano za datum : <span class="pdatum"> <?php echo $datumsmena ?> </span></label><?php	
 									}					
 									if(mysqli_num_rows($query) < 1){
 										echo "Nema izdatih obroka za danas";
@@ -280,7 +417,7 @@ require '../connection.php';
 									foreach ($query as $smena){
 
 										?>
-										<p> Prva smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<p> Prva smena : <span class="pform"> <?= $smena['Total'];?></span> izdatih jela </p>
 										<?php
 									}
 									
@@ -298,7 +435,7 @@ require '../connection.php';
 									foreach ($query as $smena){
 
 										?>
-										<p> Druga smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<p> Druga smena : <span class="pform"> <?= $smena['Total'];?></span> izdatih jela </p>
 										<?php
 									}
 									
@@ -316,7 +453,7 @@ require '../connection.php';
 									foreach ($query as $smena){
 
 										?>
-										<p> Treća smena : <span> <?= $smena['Total'];?></span> izdatih jela </p>
+										<p> Treća smena : <span class="pform"> <?= $smena['Total'];?></span> izdatih jela </p>
 										<?php
 									}
 									
@@ -327,6 +464,7 @@ require '../connection.php';
 							</div>
 						</div>
 					</div>
+		
 				<!-- <div class="col-md-3">
 					<div class="card mt-4 mb-4">
 						<div class="card-header bg-warning">Godina</div>
@@ -343,4 +481,4 @@ require '../connection.php';
 	</body>
 </html>
 <script src="charts.js"></script>
-
+<script src="formareset.js"></script>

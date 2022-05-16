@@ -399,7 +399,7 @@ load(); //if you don't want the click
            {
              var json = JSON.parse(data);
              var status = json.status;
-             console.log(status);
+             //console.log(status);
              if(status=='true')
              {
               table =$('#example').DataTable();
@@ -413,6 +413,7 @@ load(); //if you don't want the click
               row.row("[id='" + trid + "']").data([id,ime_prezime,broj_kartice,datum,vrsta_obroka,vrsta_bona,ime_jela,button]);
               $('#exampleModal').modal('hide');
             }
+            
             else
             {
               alert('failed');
