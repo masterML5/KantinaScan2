@@ -261,13 +261,18 @@ require '../connection.php';
 						<label for="">Izaberite datum za izveštaj : </label>
 						<input type="date" name="datumvrstaobroka" id="datumvrstaobroka">
 						<button type="submit" name="SubmitVrstaObroka" class="btn btn-primary">Filtriraj</button>
-						<button type="reset" id="resetbtnVrstaObroka" name="resetbtnVrstaObroka" onClick="resetformVrstaObroka();" class="btn btn-danger">Poništi</button>
+						<button type="reset" id="resetbtnVrstaObroka" name="resetbtnVrstaObroka" onClick="window.location.reload();" class="btn btn-danger">Poništi</button>
 						</form>
 						</div>
 						<?php 		
 									$datumVrstaObroka = '';
 									
 									if(isset($_POST['SubmitVrstaObroka'])){
+										if(empty($datumVrstaObroka)){
+											echo '<p><span>Morate izabrati datum!</span></p>';
+										}else{
+
+										
 									$datumVrstaObroka = $_POST['datumvrstaobroka'];								
 									
 									$sqlvrstaObrokaHladni = "SELECT vrsta_obroka AS 'vrstaObroka',COUNT(id) AS Total
@@ -277,7 +282,7 @@ require '../connection.php';
 									?> <label id="filterdatum">Filtrirano za datum : <span id="pdatumVrstaObroka"> <?php echo $datumVrstaObroka ?> </span></label><br><?php	
 												
 									if(mysqli_num_rows($query_vrstah) < 1 || $fetch_vrstah['Total'] == '0'){
-										echo "Nema izdatih obroka za izabrani datum <br>";
+										echo "<p>Nema izdatih <span> hladnih </span> obrok za izabrani datum</p>";
 									}
 									else{
 
@@ -295,7 +300,7 @@ require '../connection.php';
 									$fetch_vrstat = mysqli_fetch_assoc($query_vrstat);
 									
 									if( $fetch_vrstah['Total'] == '0' || mysqli_num_rows($query_vrstat) < 1 ){
-										echo "Nema izdatih obroka za izabrani datum";
+										echo "<p>Nema izdatih  <span> toplih </span> obrok za izabrani datum</p>";
 									}
 									else{
 
@@ -307,7 +312,9 @@ require '../connection.php';
 									}
 									
 								}
-									}else{
+
+									}
+								}else{
 										echo '<div class="poruka">Niste izabrali datum</div>';
 									}
 									
@@ -325,12 +332,15 @@ require '../connection.php';
 						<label for="">Izaberite datum za izveštaj : </label>
 						<input type="date" name="datumbon" id="datumbon">
 						<button type="submit" name="SubmitBon" class="btn btn-primary">Filtriraj</button>
-						<button type="reset" id="resetbtnbon" name="resetbtnbon" onClick="resetformbon();" class="btn btn-danger">Poništi</button>
+						<button type="reset" id="resetbtnbon" name="resetbtnbon" onClick="window.location.reload();" class="btn btn-danger">Poništi</button>
 						</form>
 						</div>
 						<?php 		
 									$datumbon = '';
 									if(isset($_POST['SubmitBon'])){
+										if(empty($datumbon)){
+											echo '<p><span>Morate izabrati datum!</span></p>';
+										}else{
 									$datumbon = $_POST['datumbon'];								
 								
 									$sql = "SELECT vrsta_bona AS 'Bonovi',COUNT(id) AS Total
@@ -390,7 +400,8 @@ require '../connection.php';
 									}
 									
 									}
-								}else{
+								}
+							}else{
 									echo '<div class="poruka">Niste izabrali datum</div>';
 								}
 								?>	
@@ -407,25 +418,29 @@ require '../connection.php';
 						<label for="">Izaberite datum za izveštaj : </label>
 						<input type="date" name="datumsmena" id="datumsmena">
 						<button type="submit" name="SubmitSmena" class="btn btn-primary">Filtriraj</button>
-						<button type="reset" id="resetbtn" name="resetbtn" onClick="resetform();" class="btn btn-danger">Poništi</button>
+						<button type="reset" id="resetbtn" name="resetbtn" onClick="window.location.reload();" class="btn btn-danger">Poništi</button>
 						</form>
 						</div>
 						<?php 		
 									$datumsmena = '';
 									if(isset($_POST['SubmitSmena'])){
+										if(empty($datumsmena)){
+											echo '<p><span>Morate izabrati datum!</span></p>';
+										}else{
 									$datumsmena = $_POST['datumsmena'];								
 									
 									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 6 AND 14 AND datum = '$datumsmena'";
-									$query = mysqli_query($con, $sql);
+									$query_smenap = mysqli_query($con, $sql);
+									$fetch_smenap = mysqli_fetch_assoc($query_smenap);
 									?> <label id="filterdatum">Filtrirano za datum : <span class="pdatum"> <?php echo $datumsmena ?> </span></label><?php	
 													
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih obroka za danas";
+									if(mysqli_num_rows($query_smenap) < 1 || $fetch_smenap['Total'] == '0'){
+										echo "<p>Nema izdatih obroka za <span> prvu </span> smenu za izabrani datum</p>";
 									}
 									else{
 
-									foreach ($query as $smena){
+									foreach ($query_smenap as $smena){
 
 										?>
 										<p> Prva smena : <span class="pform"> <?= $smena['Total'];?></span> izdatih jela </p>
@@ -435,15 +450,16 @@ require '../connection.php';
 									}
 									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 14 AND 22 AND datum = '$datumsmena'";
-									$query = mysqli_query($con, $sql);
+									$query_smenad = mysqli_query($con, $sql);
+									$fetch_smenad = mysqli_fetch_assoc($query_smenad);
 									
 									
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih obroka za danas";
+									if(mysqli_num_rows($query_smenad) < 1 || $fetch_smenad['Total'] == '0'){
+										echo "<p>Nema izdatih obroka za <span> drugu </span> smenu za izabrani datum</p>";
 									}
 									else{
 
-									foreach ($query as $smena){
+									foreach ($query_smenad as $smena){
 
 										?>
 										<p> Druga smena : <span class="pform"> <?= $smena['Total'];?></span> izdatih jela </p>
@@ -453,21 +469,23 @@ require '../connection.php';
 									}
 									$sql = "SELECT HOUR(`vreme_obroka`) AS 'Sati',COUNT(id) AS Total
 									FROM `kantina_statistika` WHERE HOUR(`vreme_obroka`) BETWEEN 22 AND 6 AND datum = '$datumsmena'";
-									$query = mysqli_query($con, $sql);
+									$query_smenat = mysqli_query($con, $sql);
+									$fetch_smenat = mysqli_fetch_assoc($query_smenat);
 									
 									
-									if(mysqli_num_rows($query) < 1){
-										echo "Nema izdatih obroka za danas";
+									if(mysqli_num_rows($query_smenat) < 1 || $fetch_smenat['Total'] == '0'){
+										echo "<p>Nema izdatih obroka za <span> treću </span> smenu za izabrani datum</p>";
 									}
 									else{
 
-									foreach ($query as $smena){
+									foreach ($query_smenat as $smena){
 
 										?>
 										<p> Treća smena : <span class="pform"> <?= $smena['Total'];?></span> izdatih jela </p>
 										<?php
 									}
 									
+									}
 									}
 								}else{
 									echo '<div class="poruka">Niste izabrali datum<div>';
